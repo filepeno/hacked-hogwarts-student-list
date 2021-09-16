@@ -14,32 +14,20 @@
     </header>
     <main>
       <h2>Class of 1992</h2>
-      <section class="list">
+      <section class="studentList"></section>
+
+      <template id="studentListTemplate">
         <article class="student">
-          <div class="img"></div>
-          <div class="name">Harry James Potter</div>
+          <div class="imgWrapper">
+            <img src="" alt="" class="img" />
+          </div>
+          <div class="name">*Full Name*</div>
           <div class="honours">
-            <div class="star-icon">⭐</div>
-            <div class="death-icon">💀</div>
+            <div class="star-icon" class="hidden">⭐</div>
+            <div class="death-icon" class="hidden">💀</div>
           </div>
         </article>
-        <article class="student">
-          <div class="img"></div>
-          <div class="name">Hermione Jean Granger</div>
-        </article>
-        <article class="student">
-          <div class="img"></div>
-          <div class="name">Ronald Weasley</div>
-        </article>
-        <article class="student">
-          <div class="img"></div>
-          <div class="name">Ronald Weasley</div>
-        </article>
-        <article class="student">
-          <div class="img"></div>
-          <div class="name">Ronald Weasley</div>
-        </article>
-      </section>
+      </template>
     </main>
     <script src="script.js"></script>
   </body>

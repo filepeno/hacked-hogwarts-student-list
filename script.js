@@ -1,11 +1,13 @@
 "use strict";
 
+const HTML = {};
+
 const Student = {
   firstName: "",
   lastName: "",
   middleName: "",
   nickName: "",
-  image: "",
+  img: "",
   house: "",
 };
 
@@ -13,6 +15,7 @@ window.addEventListener("DOMContentLoaded", start);
 
 function start() {
   console.log("ready");
+  HTML.list = document.querySelector(".studentList");
   loadJSON();
 }
 
@@ -25,10 +28,45 @@ function loadJSON() {
     });
 }
 
-function prepareObjects(students) {
+function prepareObjects(studentsJSON) {
   console.log("prepareObjects()");
-  const studentArray = students.map(prepareObject);
-  console.log(studentArray);
+  const students = studentsJSON.map(prepareObject);
+  buildList(students);
+}
+
+function buildList(array) {
+  console.log("buildList()");
+  displayList(array);
+}
+
+function displayList(array) {
+  console.log("displayList()");
+  // clear the list
+  HTML.list.innerHTML = "";
+  //display list from the array
+  array.forEach(displayStudent);
+}
+
+function displayStudent(student) {
+  //grab template
+  const template = document.querySelector("template#studentListTemplate").content;
+  // create clone
+  const clone = template.cloneNode(true);
+  // change content
+  clone.querySelector(".img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+  clone.querySelector(".img").alt = `Image of ${student.firstName} ${student.lastName}`;
+  if (student.nickName === null && student.middleName === null) {
+    clone.querySelector(".name").textContent = `${student.firstName} ${student.lastName}`;
+  } else if (student.nickName === null) {
+    clone.querySelector(".name").textContent = `${student.firstName} ${student.middleName} ${student.lastName}`;
+  } else if (student.middleName === null) {
+    clone.querySelector(".name").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
+  }
+
+  //grab parent
+  const parent = document.querySelector(".studentList");
+  //append
+  parent.appendChild(clone);
 }
 
 function prepareObject(student) {
@@ -38,7 +76,7 @@ function prepareObject(student) {
   studentObj.nickName = getNickName(student.fullname);
   studentObj.lastName = getLastName(student.fullname);
   studentObj.house = getHouse(student.house);
-  studentObj.image = getImage(student.fullname);
+  studentObj.img = getImage(student.fullname);
   return studentObj;
 }
 

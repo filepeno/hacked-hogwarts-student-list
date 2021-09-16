@@ -9,6 +9,7 @@
   --color-01: rgb(201, 164, 3);
   --color-02: rgb(226, 129, 17);
   --color-03: rgb(32, 32, 32);
+  --color-04: rgb(82, 82, 82);
 
   /* fonts */
   --font-01: baroque-text-jf, sans-serif;
@@ -39,11 +40,23 @@ h2 {
   font-family: var(--font-02);
 }
 
-section.list {
+section.studentList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: 3rem 1rem;
   margin: 2rem;
+}
+
+div.imgWrapper {
+  margin: 1rem;
+  height: 108px;
+  width: 114px;
+}
+
+.img {
+  border-radius: 22%;
+  color: var(--color-04);
+  text-align: center;
 }
 
 article.student {
@@ -54,13 +67,6 @@ article.student {
   background-color: var(--color-03);
   font-family: var(--font-02);
   height: 250px;
-}
-
-div.img {
-  height: 114px;
-  width: 108px;
-  background: grey;
-  margin: 1rem;
 }
 
 div.name {
