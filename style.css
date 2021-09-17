@@ -6,9 +6,10 @@
 
 :root {
   --bg-color-01: rgb(29, 29, 29);
+  --bg-color-02: rgb(34, 26, 22);
   --color-01: rgb(201, 164, 3);
-  --color-02: rgb(226, 129, 17);
-  --color-03: rgb(32, 32, 32);
+  --color-02: rgb(194, 119, 33);
+  --color-03: rgb(56, 56, 56);
   --color-04: rgb(82, 82, 82);
 
   /* fonts */
@@ -18,16 +19,18 @@
 
 body {
   background-color: var(--bg-color-01);
+  font-family: var(--font-02);
 }
 
 header {
   /* display: flex;
   align-items: center; */
   margin-bottom: 1rem;
+  background-color: var(--bg-color-02);
+  padding: 2rem;
 }
 
 h1 {
-  margin-top: 2rem;
   text-align: center;
   color: var(--color-01);
   font-family: var(--font-01);
@@ -37,7 +40,6 @@ h2 {
   text-align: center;
   font-size: 1.5rem;
   color: var(--color-01);
-  font-family: var(--font-02);
 }
 
 section.studentList {
@@ -45,6 +47,16 @@ section.studentList {
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: 3rem 1rem;
   margin: 2rem;
+}
+
+article.student {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-02);
+  background-color: var(--color-03);
+  height: 250px;
 }
 
 div.imgWrapper {
@@ -59,16 +71,6 @@ div.imgWrapper {
   text-align: center;
 }
 
-article.student {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--color-02);
-  background-color: var(--color-03);
-  font-family: var(--font-02);
-  height: 250px;
-}
-
 div.name {
   margin: 1rem;
 }
@@ -79,6 +81,52 @@ div.honours {
 
 div.honours > div:first-child {
   margin-right: 0.5rem;
+}
+
+article.studentCard {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--color-01);
+  width: 19rem;
+  height: 24rem;
+}
+.info {
+  /* width: 16rem; */
+}
+.info ul {
+  list-style: none;
+}
+
+.appointPrefect,
+.appointInquisitor {
+  display: flex;
+  justify-content: space-between;
+}
+
+.appointBtn {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+/* article.studentCard.slytherin {
+  background-color: ;
+} */
+
+button.closeStudentCard {
+  align-self: flex-end;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 /* media-queries */

@@ -9,6 +9,11 @@ const Student = {
   nickName: "",
   img: "",
   house: "",
+  //TO do: add gender from json
+  bloodType: "muggle",
+  prefect: false,
+  inquisitor: false,
+  expelled: false,
 };
 
 window.addEventListener("DOMContentLoaded", start);
@@ -62,11 +67,35 @@ function displayStudent(student) {
   } else if (student.middleName === null) {
     clone.querySelector(".name").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
   }
-
+  clone.querySelector(".student").addEventListener("click", openStudentCard);
+  function openStudentCard() {
+    console.log(student);
+    document.querySelector(".studentCard").classList.remove("hidden");
+    //change content
+    document.querySelector(".studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+    document.querySelector(".studentCard .img").alt = `Image of ${student.firstName} ${student.lastName}`;
+    if (student.nickName === null && student.middleName === null) {
+      document.querySelector(".studentCard h3").textContent = `${student.firstName} ${student.lastName}`;
+    } else if (student.nickName === null) {
+      document.querySelector(".studentCard h3").textContent = `${student.firstName} ${student.middleName} ${student.lastName}`;
+    } else if (student.middleName === null) {
+      document.querySelector(".studentCard h3").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
+    }
+    document.querySelector(".info .house").textContent = `House: ${student.house}`;
+    document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
+    //TO DO: change Ms/Mr based on gender
+    document.querySelector(".expel").textContent = `Expel Ms. ${student.lastName}`;
+    document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
+  }
   //grab parent
   const parent = document.querySelector(".studentList");
   //append
   parent.appendChild(clone);
+  //eventlistener for click
+}
+
+function closeStudentCard() {
+  document.querySelector(".studentCard").classList.add("hidden");
 }
 
 function prepareObject(student) {
