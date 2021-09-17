@@ -20,6 +20,8 @@
 body {
   background-color: var(--bg-color-01);
   font-family: var(--font-02);
+  color: var(--color-01);
+  margin: 2rem;
 }
 
 header {
@@ -42,11 +44,20 @@ h2 {
   color: var(--color-01);
 }
 
+div.filterSelector {
+  display: flex;
+  flex-direction: column;
+}
+
+select#filter {
+  width: 10rem;
+}
+
 section.studentList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: 3rem 1rem;
-  margin: 2rem;
+  margin-top: 2rem;
 }
 
 article.student {
@@ -131,7 +142,8 @@ button.closeStudentCard {
 
 /* media-queries */
 
-@media screen and (max-width: 700px) {
-  section.list {
+@media screen and (max-width: 420px) {
+  section.studentList {
+    margin: 2rem 2rem 0 2rem;
   }
 }

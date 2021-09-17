@@ -2,6 +2,13 @@
 
 const HTML = {};
 
+let allStudents = [];
+
+const settings = {
+  filterBy: "students",
+  sortBy: "asc",
+};
+
 const Student = {
   firstName: "",
   lastName: "",
@@ -20,7 +27,10 @@ window.addEventListener("DOMContentLoaded", start);
 function start() {
   console.log("ready");
   HTML.list = document.querySelector(".studentList");
+  HTML.filterSelector = document.querySelectorAll("option");
+  HTML.selectedFilter = document.querySelector("select");
   loadJSON();
+  trackFilterSelection();
 }
 
 function loadJSON() {
@@ -34,22 +44,70 @@ function loadJSON() {
 
 function prepareObjects(studentsJSON) {
   console.log("prepareObjects()");
-  const students = studentsJSON.map(prepareObject);
-  console.log(students);
-  buildList(students);
+  allStudents = studentsJSON.map(prepareObject);
+  console.log(allStudents);
+  buildList(allStudents);
 }
 
-function buildList(array) {
+function trackFilterSelection() {
+  HTML.selectedFilter.value = "students";
+  HTML.filterSelector.forEach((element) => {
+    element.addEventListener("click", updateFilter);
+  });
+}
+
+function updateFilter() {
+  const selectedFilter = HTML.selectedFilter.value;
+  settings.filterBy = selectedFilter;
+  buildList();
+}
+
+function buildList() {
   console.log("buildList()");
-  displayList(array);
+  const filteredList = filterList(allStudents);
+  console.log(filteredList);
+  displayList(filteredList);
 }
 
-function displayList(array) {
+function filterList(allStudents) {
+  console.log("filterList()");
+  console.log(settings.filterBy);
+  console.log(allStudents);
+  let filteredList = allStudents;
+  if (settings.filterBy === "students") {
+    filteredList = allStudents.filter(isNotExpelled);
+    function isNotExpelled(student) {
+      if (student.expelled === false) {
+        return true;
+      }
+    }
+  } else if (settings.filterBy === "expelled") {
+    filteredList = allStudents.filter(isExpelled);
+    function isExpelled(student) {
+      if (student.expelled === true) {
+        return true;
+      }
+    }
+    if (filteredList.length === 0) {
+      //TO DO make a message "no expelled students yet"
+    }
+  } else {
+    filteredList = allStudents.filter(whichHouse);
+    function whichHouse(student) {
+      if (settings.filterBy === student.house && student.expelled === false) {
+        return true;
+      }
+    }
+  }
+  return filteredList;
+}
+
+function displayList(students) {
   console.log("displayList()");
   // clear the list
   HTML.list.innerHTML = "";
   //display list from the array
-  array.forEach(displayStudent);
+  students.forEach(displayStudent);
 }
 
 function displayStudent(student) {
