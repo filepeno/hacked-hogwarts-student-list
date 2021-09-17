@@ -32,6 +32,7 @@ function start() {
   HTML.selectedFilter = document.querySelector("select#filter");
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
+  HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
   loadJSON();
   displayDefaultSelectionValues();
   trackFilterSelection();
@@ -59,10 +60,14 @@ function displayDefaultSelectionValues() {
   HTML.selectedSorting.value = "lastName";
 }
 
-function trackFilterSelection() {
+function trackSelectors() {
   HTML.filterSelector.forEach((element) => {
     element.addEventListener("click", updateFilterBy);
   });
+  HTML.sortSelector.forEach((element) => {
+    element.addEventListener("click", updateSortBy);
+  });
+  HTML.sortDirBtn.addEventListener("click", updateSortDir);
 }
 
 function updateFilterBy() {
@@ -71,17 +76,13 @@ function updateFilterBy() {
   buildList();
 }
 
-function trackSortBySelection() {
-  HTML.sortSelector.forEach((element) => {
-    element.addEventListener("click", updateSortBy);
-  });
-}
-
 function updateSortBy() {
   const selectedSorting = HTML.selectedSorting.value;
   settings.sortBy = selectedSorting;
   buildList();
 }
+
+function updateSortDir() {}
 
 function buildList() {
   console.log("buildList()");
