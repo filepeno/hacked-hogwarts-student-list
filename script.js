@@ -6,7 +6,8 @@ let allStudents = [];
 
 const settings = {
   filterBy: "students",
-  sortBy: "asc",
+  sortBy: "lastName",
+  sortDir: "",
 };
 
 const Student = {
@@ -27,10 +28,14 @@ window.addEventListener("DOMContentLoaded", start);
 function start() {
   console.log("ready");
   HTML.list = document.querySelector(".studentList");
-  HTML.filterSelector = document.querySelectorAll("option");
-  HTML.selectedFilter = document.querySelector("select");
+  HTML.filterSelector = document.querySelectorAll("select#filter > option");
+  HTML.selectedFilter = document.querySelector("select#filter");
+  HTML.sortSelector = document.querySelectorAll("select#sort > option");
+  HTML.selectedSorting = document.querySelector("select#sort");
   loadJSON();
+  displayDefaultSelectionValues();
   trackFilterSelection();
+  trackSortBySelection();
 }
 
 function loadJSON() {
@@ -49,24 +54,41 @@ function prepareObjects(studentsJSON) {
   buildList(allStudents);
 }
 
-function trackFilterSelection() {
+function displayDefaultSelectionValues() {
   HTML.selectedFilter.value = "students";
+  HTML.selectedSorting.value = "lastName";
+}
+
+function trackFilterSelection() {
   HTML.filterSelector.forEach((element) => {
-    element.addEventListener("click", updateFilter);
+    element.addEventListener("click", updateFilterBy);
   });
 }
 
-function updateFilter() {
+function updateFilterBy() {
   const selectedFilter = HTML.selectedFilter.value;
   settings.filterBy = selectedFilter;
+  buildList();
+}
+
+function trackSortBySelection() {
+  HTML.sortSelector.forEach((element) => {
+    element.addEventListener("click", updateSortBy);
+  });
+}
+
+function updateSortBy() {
+  const selectedSorting = HTML.selectedSorting.value;
+  settings.sortBy = selectedSorting;
   buildList();
 }
 
 function buildList() {
   console.log("buildList()");
   const filteredList = filterList(allStudents);
-  console.log(filteredList);
-  displayList(filteredList);
+  const sortedList = sortList(filteredList);
+  // console.log(sortedList);
+  displayList(sortedList);
 }
 
 function filterList(allStudents) {
@@ -100,6 +122,19 @@ function filterList(allStudents) {
     }
   }
   return filteredList;
+}
+
+function sortList(filteredList) {
+  console.log("sortList(filteredList)");
+  console.log(settings.sortBy);
+  let sortedList = filteredList.sort(compareBySortSelection);
+  function compareBySortSelection(a, b) {
+    if (a[settings.sortBy] < b[settings.sortBy]) {
+      return -1;
+    }
+    return 1;
+  }
+  return sortedList;
 }
 
 function displayList(students) {

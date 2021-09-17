@@ -44,13 +44,20 @@ h2 {
   color: var(--color-01);
 }
 
-div.filterSelector {
+section.selectors {
+  display: flex;
+  margin-top: 1rem;
+}
+
+div.filterSelector,
+div.sortSelector {
   display: flex;
   flex-direction: column;
+  margin-right: 1rem;
 }
 
 select#filter {
-  width: 10rem;
+  /* width: 10rem; */
 }
 
 section.studentList {

@@ -14,17 +14,29 @@
     </header>
     <main>
       <h2>Class of 1992</h2>
-      <div class="filterSelector">
-        <label for="filter">Filter by: </label>
-        <select name="filter" id="filter">
-          <option value="students">All students</option>
-          <option value="expelled">Expelled students</option>
-          <option value="Gryffindor">House: Gryffindor students</option>
-          <option value="Slytherin">House: Slytherin students</option>
-          <option value="Ravenclaw">House: Ravenclaw students</option>
-          <option value="Hufflepuff">House: Hufflepuff students</option>
-        </select>
-      </div>
+      <section class="selectors">
+        <div class="filterSelector">
+          <label for="filter">Filter by:</label>
+          <select name="filter" id="filter">
+            <option value="students">All students</option>
+            <option value="expelled">Expelled students</option>
+            <option value="Gryffindor">House: Gryffindor students</option>
+            <option value="Slytherin">House: Slytherin students</option>
+            <option value="Ravenclaw">House: Ravenclaw students</option>
+            <option value="Hufflepuff">House: Hufflepuff students</option>
+          </select>
+        </div>
+        <div class="sortSelector">
+          <label for="sort">Sort by:</label>
+          <div class="sortByAndDir">
+            <select name="sort" id="sort">
+              <option value="lastName">Last name</option>
+              <option value="firstName">First name</option>
+            </select>
+            <button class="sortDir">Asc.</button>
+          </div>
+        </div>
+      </section>
       <section class="studentList"></section>
 
       <template id="studentListTemplate">
