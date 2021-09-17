@@ -7,7 +7,7 @@ let allStudents = [];
 const settings = {
   filterBy: "students",
   sortBy: "lastName",
-  sortDir: "",
+  sortDir: "asc",
 };
 
 const Student = {
@@ -35,8 +35,7 @@ function start() {
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
   loadJSON();
   displayDefaultSelectionValues();
-  trackFilterSelection();
-  trackSortBySelection();
+  trackSelectors();
 }
 
 function loadJSON() {
@@ -62,27 +61,59 @@ function displayDefaultSelectionValues() {
 
 function trackSelectors() {
   HTML.filterSelector.forEach((element) => {
-    element.addEventListener("click", updateFilterBy);
+    element.addEventListener("click", getFilterBy);
   });
   HTML.sortSelector.forEach((element) => {
-    element.addEventListener("click", updateSortBy);
+    element.addEventListener("click", getSortBy);
   });
-  HTML.sortDirBtn.addEventListener("click", updateSortDir);
+  HTML.sortDirBtn.addEventListener("click", getSortDir);
 }
 
-function updateFilterBy() {
+function getFilterBy() {
   const selectedFilter = HTML.selectedFilter.value;
+  settings.filterBy = selectedFilter;
+  updateSortBySettings(selectedFilter);
+}
+
+function updateFilterBySettings(selectedFilter) {
   settings.filterBy = selectedFilter;
   buildList();
 }
 
-function updateSortBy() {
+function getSortBy() {
   const selectedSorting = HTML.selectedSorting.value;
+  updateSortBySettings(selectedSorting);
+}
+
+function updateSortBySettings(selectedSorting) {
   settings.sortBy = selectedSorting;
   buildList();
 }
 
-function updateSortDir() {}
+function getSortDir(event) {
+  let selectedDirection = event.target.dataset.sortDirection;
+  console.log("user changed direction to " + selectedDirection);
+  if (selectedDirection === "asc") {
+    event.target.dataset.sortDirection = "desc";
+    selectedDirection = "desc";
+    //TO DO change icon
+  } else {
+    event.target.dataset.sortDirection = "asc";
+    selectedDirection = "asc";
+    //TO DO change icon
+  }
+  updateSortDirSettings(selectedDirection);
+  updateSortDirDisplay();
+}
+
+function updateSortDirSettings(selectedDirection) {
+  settings.sortDir = selectedDirection;
+  buildList();
+}
+
+function updateSortDirDisplay() {
+  HTML.sortDirBtn.textContent = HTML.sortDirBtn.dataset.sortDirection;
+}
 
 function buildList() {
   console.log("buildList()");
@@ -127,13 +158,17 @@ function filterList(allStudents) {
 
 function sortList(filteredList) {
   console.log("sortList(filteredList)");
-  console.log(settings.sortBy);
+  console.log(settings.sortDir);
+  let sortDir = 1;
+  if (settings.sortDir === "desc") {
+    sortDir = -1;
+  }
   let sortedList = filteredList.sort(compareBySortSelection);
   function compareBySortSelection(a, b) {
     if (a[settings.sortBy] < b[settings.sortBy]) {
-      return -1;
+      return -1 * sortDir;
     }
-    return 1;
+    return 1 * sortDir;
   }
   return sortedList;
 }
