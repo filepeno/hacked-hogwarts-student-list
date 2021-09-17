@@ -9,7 +9,6 @@ const Student = {
   nickName: "",
   img: "",
   house: "",
-  //TO do: add gender from json
   bloodType: "muggle",
   prefect: false,
   inquisitor: false,
@@ -36,6 +35,7 @@ function loadJSON() {
 function prepareObjects(studentsJSON) {
   console.log("prepareObjects()");
   const students = studentsJSON.map(prepareObject);
+  console.log(students);
   buildList(students);
 }
 
@@ -84,7 +84,11 @@ function displayStudent(student) {
     document.querySelector(".info .house").textContent = `House: ${student.house}`;
     document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
     //TO DO: change Ms/Mr based on gender
-    document.querySelector(".expel").textContent = `Expel Ms. ${student.lastName}`;
+    if (student.gender === "girl") {
+      document.querySelector(".expel").textContent = `Expel Ms. ${student.lastName}`;
+    } else {
+      document.querySelector(".expel").textContent = `Expel Mr. ${student.lastName}`;
+    }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
   }
   //grab parent
@@ -106,6 +110,7 @@ function prepareObject(student) {
   studentObj.lastName = getLastName(student.fullname);
   studentObj.house = getHouse(student.house);
   studentObj.img = getImage(student.fullname);
+  studentObj.gender = student.gender;
   return studentObj;
 }
 
