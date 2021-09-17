@@ -68,8 +68,8 @@ function displayStudent(student) {
     clone.querySelector(".name").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
   }
   clone.querySelector(".student").addEventListener("click", openStudentCard);
+  //build student card view
   function openStudentCard() {
-    console.log(student);
     document.querySelector(".studentCard").classList.remove("hidden");
     //change content
     document.querySelector(".studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
@@ -83,7 +83,6 @@ function displayStudent(student) {
     }
     document.querySelector(".info .house").textContent = `House: ${student.house}`;
     document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
-    //TO DO: change Ms/Mr based on gender
     if (student.gender === "girl") {
       document.querySelector(".expel").textContent = `Expel Ms. ${student.lastName}`;
     } else {
@@ -91,11 +90,8 @@ function displayStudent(student) {
     }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
   }
-  //grab parent
   const parent = document.querySelector(".studentList");
-  //append
   parent.appendChild(clone);
-  //eventlistener for click
 }
 
 function closeStudentCard() {
