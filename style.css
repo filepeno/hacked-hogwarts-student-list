@@ -12,6 +12,14 @@
   --color-03: rgb(56, 56, 56);
   --color-04: rgb(82, 82, 82);
   --color-05: rgb(0, 0, 0);
+  --gryf-bg-color: #740001;
+  --gryf-color: #eeba30;
+  --slyt-bg-color: #aaaaaa;
+  --slyt-color: #1a472a;
+  --rave-bg-color: #222f5b;
+  --rave-color: #ae7114;
+  --huff-bg-color: #60605c;
+  --huff-color: #ffdb00;
 
   /* fonts */
   --font-01: baroque-text-jf, sans-serif;
@@ -102,7 +110,7 @@ div.honours > div:first-child {
   margin-right: 0.5rem;
 }
 
-article.studentCard {
+article#studentCard {
   position: absolute;
   top: 20%;
   left: 35%;
@@ -110,11 +118,38 @@ article.studentCard {
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-01);
+  border-style: outset;
+  border-width: 1rem;
+  border-radius: 0.5rem;
   width: 19rem;
   height: 24rem;
   color: var(--color-05);
 }
+
+article#studentCard.gryffindor {
+  background-color: var(--gryf-bg-color);
+  color: var(--gryf-color);
+  border-color: var(--gryf-color);
+}
+
+article#studentCard.slytherin {
+  background-color: var(--slyt-bg-color);
+  color: var(--slyt-color);
+  border-color: var(--slyt-color);
+}
+
+article#studentCard.ravenclaw {
+  background-color: var(--rave-bg-color);
+  color: var(--rave-color);
+  border-color: var(--rave-color);
+}
+
+article#studentCard.hufflepuff {
+  background-color: var(--huff-bg-color);
+  color: var(--huff-color);
+  border-color: var(--huff-color);
+}
+
 .info {
   /* width: 16rem; */
 }

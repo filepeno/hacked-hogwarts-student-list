@@ -33,7 +33,7 @@ function start() {
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
-  HTML.studentCard = document.querySelector(".studentCard");
+  HTML.studentCard = document.querySelector("article#studentCard");
   HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
   displayDefaultSelectionValues();
@@ -203,17 +203,27 @@ function displayStudent(student) {
   function openStudentCard() {
     HTML.studentCard.classList.remove("hidden");
     //change content
-    document.querySelector(".studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
-    document.querySelector(".studentCard .img").alt = `Image of ${student.firstName} ${student.lastName}`;
+    document.querySelector("#studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+    document.querySelector("#studentCard .img").alt = `Image of ${student.firstName} ${student.lastName}`;
     if (student.nickName === null && student.middleName === null) {
-      document.querySelector(".studentCard h3").textContent = `${student.firstName} ${student.lastName}`;
+      document.querySelector("#studentCard h3").textContent = `${student.firstName} ${student.lastName}`;
     } else if (student.nickName === null) {
-      document.querySelector(".studentCard h3").textContent = `${student.firstName} ${student.middleName} ${student.lastName}`;
+      document.querySelector("#studentCard h3").textContent = `${student.firstName} ${student.middleName} ${student.lastName}`;
     } else if (student.middleName === null) {
-      document.querySelector(".studentCard h3").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
+      document.querySelector("#studentCard h3").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
     }
     document.querySelector(".info .house").textContent = `House: ${student.house}`;
     document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
+    //house colours
+    if (student.house === "Gryffindor") {
+      HTML.studentCard.classList.add("gryffindor");
+    } else if (student.house === "Slytherin") {
+      HTML.studentCard.classList.add("slytherin");
+    } else if (student.house === "Ravenclaw") {
+      HTML.studentCard.classList.add("ravenclaw");
+    } else {
+      HTML.studentCard.classList.add("hufflepuff");
+    }
     //expelling
     if (student.gender === "girl") {
       HTML.expelBtn.textContent = `Expel Ms. ${student.lastName}`;
@@ -249,8 +259,8 @@ function changeToExpelledCard(student) {
 }
 
 function closeStudentCard() {
+  HTML.studentCard.classList = "";
   HTML.studentCard.classList.add("hidden");
-  HTML.studentCard.classList.remove("expelAnimation");
   HTML.expelBtn.disabled = false;
   HTML.studentCard.style.filter = "grayscale(0%)";
   buildList();
