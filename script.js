@@ -220,24 +220,17 @@ function displayStudent(student) {
     } else {
       HTML.expelBtn.textContent = `Expel Mr. ${student.lastName}`;
     }
-    //expelled student
-    if (student.expelled === true) {
-      HTML.expelBtn.disabled = "disabled";
-      const expelledNote = document.createElement("p");
-      if (student.gender === "girl") {
-        expelledNote.textContent = `Ms. ${student.lastName} is already expelled.`;
-      } else {
-        expelledNote.textContent = `Mr. ${student.lastName} is already expelled.`;
-      }
-      HTML.studentCard.appendChild(expelledNote);
-      HTML.studentCard.style.filter = "grayscale(100%)";
-    }
-    document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
     HTML.expelBtn.addEventListener("click", expelStudent);
     function expelStudent() {
       student.expelled = true;
       showExpelAnimation();
     }
+    //expelled student
+    if (student.expelled === true) {
+      console.log(student);
+      changeToExpelledCard(student);
+    }
+    document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
   }
   const parent = document.querySelector(".studentList");
   parent.appendChild(clone);
@@ -249,9 +242,17 @@ function showExpelAnimation() {
   HTML.studentCard.addEventListener("animationend", closeStudentCard);
 }
 
+function changeToExpelledCard(student) {
+  console.log(student);
+  HTML.expelBtn.disabled = true;
+  HTML.studentCard.style.filter = "grayscale(100%)";
+}
+
 function closeStudentCard() {
   HTML.studentCard.classList.add("hidden");
   HTML.studentCard.classList.remove("expelAnimation");
+  HTML.expelBtn.disabled = false;
+  HTML.studentCard.style.filter = "grayscale(0%)";
   buildList();
 }
 
