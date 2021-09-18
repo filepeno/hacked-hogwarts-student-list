@@ -11,6 +11,7 @@
   --color-02: rgb(194, 119, 33);
   --color-03: rgb(56, 56, 56);
   --color-04: rgb(82, 82, 82);
+  --color-05: rgb(0, 0, 0);
 
   /* fonts */
   --font-01: baroque-text-jf, sans-serif;
@@ -112,6 +113,7 @@ article.studentCard {
   background-color: var(--color-01);
   width: 19rem;
   height: 24rem;
+  color: var(--color-05);
 }
 .info {
   /* width: 16rem; */

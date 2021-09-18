@@ -34,6 +34,7 @@ function start() {
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
   HTML.studentCard = document.querySelector(".studentCard");
+  HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
   displayDefaultSelectionValues();
   trackSelectors();
@@ -214,14 +215,26 @@ function displayStudent(student) {
     document.querySelector(".info .house").textContent = `House: ${student.house}`;
     document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
     //expelling
-    const expelBtn = document.querySelector("button.expel");
     if (student.gender === "girl") {
-      expelBtn.textContent = `Expel Ms. ${student.lastName}`;
+      HTML.expelBtn.textContent = `Expel Ms. ${student.lastName}`;
     } else {
-      expelBtn.textContent = `Expel Mr. ${student.lastName}`;
+      HTML.expelBtn.textContent = `Expel Mr. ${student.lastName}`;
+    }
+    //expelled student
+    if (student.expelled === true) {
+      HTML.expelBtn.disabled = "disabled";
+      const expelledNote = document.createElement("p");
+      if (student.gender === "girl") {
+        expelledNote.textContent = `Ms. ${student.lastName} is already expelled.`;
+      } else {
+        expelledNote.textContent = `Mr. ${student.lastName} is already expelled.`;
+      }
+
+      console.log(expelledNote);
+      HTML.studentCard.appendChild(expelledNote);
     }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
-    expelBtn.addEventListener("click", expelStudent);
+    HTML.expelBtn.addEventListener("click", expelStudent);
     function expelStudent() {
       student.expelled = true;
       showExpelAnimation();
