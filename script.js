@@ -229,9 +229,8 @@ function displayStudent(student) {
       } else {
         expelledNote.textContent = `Mr. ${student.lastName} is already expelled.`;
       }
-
-      console.log(expelledNote);
       HTML.studentCard.appendChild(expelledNote);
+      HTML.studentCard.style.filter = "grayscale(100%)";
     }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
     HTML.expelBtn.addEventListener("click", expelStudent);
