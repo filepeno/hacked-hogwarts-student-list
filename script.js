@@ -33,6 +33,7 @@ function start() {
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
+  HTML.studentCard = document.querySelector(".studentCard");
   loadJSON();
   displayDefaultSelectionValues();
   trackSelectors();
@@ -199,7 +200,7 @@ function displayStudent(student) {
   clone.querySelector(".student").addEventListener("click", openStudentCard);
   //build student card view
   function openStudentCard() {
-    document.querySelector(".studentCard").classList.remove("hidden");
+    HTML.studentCard.classList.remove("hidden");
     //change content
     document.querySelector(".studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
     document.querySelector(".studentCard .img").alt = `Image of ${student.firstName} ${student.lastName}`;
@@ -212,19 +213,34 @@ function displayStudent(student) {
     }
     document.querySelector(".info .house").textContent = `House: ${student.house}`;
     document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
+    //expelling
+    const expelBtn = document.querySelector("button.expel");
     if (student.gender === "girl") {
-      document.querySelector(".expel").textContent = `Expel Ms. ${student.lastName}`;
+      expelBtn.textContent = `Expel Ms. ${student.lastName}`;
     } else {
-      document.querySelector(".expel").textContent = `Expel Mr. ${student.lastName}`;
+      expelBtn.textContent = `Expel Mr. ${student.lastName}`;
     }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
+    expelBtn.addEventListener("click", expelStudent);
+    function expelStudent() {
+      student.expelled = true;
+      showExpelAnimation();
+    }
   }
   const parent = document.querySelector(".studentList");
   parent.appendChild(clone);
 }
 
+function showExpelAnimation() {
+  console.log("showExpelAnimation()");
+  HTML.studentCard.classList.add("expelAnimation");
+  HTML.studentCard.addEventListener("animationend", closeStudentCard);
+}
+
 function closeStudentCard() {
-  document.querySelector(".studentCard").classList.add("hidden");
+  HTML.studentCard.classList.add("hidden");
+  HTML.studentCard.classList.remove("expelAnimation");
+  buildList();
 }
 
 function prepareObject(student) {

@@ -136,6 +136,12 @@ article.studentCard {
   background-color: ;
 } */
 
+.expelAnimation {
+  animation: expel 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
 button.closeStudentCard {
   align-self: flex-end;
   cursor: pointer;
@@ -145,6 +151,19 @@ button.closeStudentCard {
 
 .hidden {
   visibility: hidden;
+}
+
+/* animations */
+
+@keyframes expel {
+  0% {
+    opacity: 100%;
+    filter: grayscale(0%);
+  }
+  100% {
+    opacity: 0%;
+    filter: grayscale(100%);
+  }
 }
 
 /* media-queries */
