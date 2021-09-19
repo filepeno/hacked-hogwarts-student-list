@@ -77,7 +77,6 @@ section.studentList {
 }
 
 article.student {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,7 +106,29 @@ div.honours {
 }
 
 div.honours > div:first-child {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
+}
+.appointPrefect,
+.appointInquisitor {
+  display: flex;
+  justify-content: space-between;
+}
+
+.appointPrefectBtn,
+.appointInquisitorBtn {
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0.5rem;
+}
+
+[data-field="prefect"][data-prefect="false"] {
+  filter: grayscale(1);
+  opacity: 70%;
+}
+
+button.openStudentCard {
+  cursor: pointer;
 }
 
 article#studentCard {
@@ -155,18 +176,6 @@ article#studentCard.hufflepuff {
 }
 .info ul {
   list-style: none;
-}
-
-.appointPrefect,
-.appointInquisitor {
-  display: flex;
-  justify-content: space-between;
-}
-
-.appointBtn {
-  border: none;
-  cursor: pointer;
-  background: none;
 }
 
 /* article.studentCard.slytherin {

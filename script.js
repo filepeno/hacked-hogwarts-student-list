@@ -3,6 +3,7 @@
 const HTML = {};
 
 let allStudents = [];
+let prefects = [];
 
 const settings = {
   filterBy: "students",
@@ -118,6 +119,7 @@ function updateSortDirDisplay() {
 }
 
 function buildList() {
+  console.log(allStudents);
   const filteredList = filterList(allStudents);
   const sortedList = sortList(filteredList);
   displayList(sortedList);
@@ -193,9 +195,40 @@ function displayStudent(student) {
   } else if (student.middleName === null) {
     clone.querySelector(".name").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
   }
-  clone.querySelector(".student").addEventListener("click", openStudentCard);
+  const appointPrefectBtn = clone.querySelector(".appointPrefectBtn");
+  appointPrefectBtn.dataset.prefect = student.prefect;
+  //change view of prefect button based on status
+  appointPrefectBtn.addEventListener("click", changePrefectStatus);
+  //appoint a prefect
+  function changePrefectStatus() {
+    console.log("changePrefectStatus");
+    console.log(student);
+    if (student.prefect === true) {
+      student.prefect = false;
+    } else {
+      tryToAddToPrefects(student);
+    }
+    function tryToAddToPrefects() {
+      console.log("tryToAddToPrefects");
+      console.log(prefects);
+      if (prefects.some((obj) => obj.gender === student.gender)) {
+        console.log("There is already prefects of same gender");
+      } else {
+        if (prefects.length === 2) {
+          console.log("There is already 2 prefects");
+        } else {
+          student.prefect = true;
+        }
+      }
+    }
+    buildPrefectsList();
+    buildList();
+    // changePrefectView(student);
+  }
+  clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
   //build student card view
   function openStudentCard() {
+    console.log(student);
     HTML.studentCard.classList.remove("hidden");
     //change content
     document.querySelector("#studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
@@ -219,6 +252,7 @@ function displayStudent(student) {
     } else {
       HTML.studentCard.classList.add("hufflepuff");
     }
+
     //expelling
     if (student.gender === "girl") {
       HTML.expelBtn.textContent = `Expel Ms. ${student.lastName}`;
@@ -239,6 +273,19 @@ function displayStudent(student) {
   }
   const parent = document.querySelector(".studentList");
   parent.appendChild(clone);
+}
+
+function buildPrefectsList() {
+  prefects = allStudents.filter((student) => student.prefect === true);
+  console.log(prefects);
+}
+
+function changePrefectView(student) {
+  if (student.prefect === true) {
+    HTML.prefectBtn.classList.remove("faded");
+  } else {
+    HTML.prefectBtn.classList.add("faded");
+  }
 }
 
 function showExpelAnimation() {
