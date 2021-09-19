@@ -50,7 +50,6 @@ function loadJSON() {
 }
 
 function prepareObjects(studentsJSON) {
-  console.log("prepareObjects()");
   allStudents = studentsJSON.map(prepareObject);
   console.log(allStudents);
   buildList(allStudents);
@@ -73,7 +72,7 @@ function trackSelectors() {
 
 function getFilterBy() {
   const selectedFilter = HTML.selectedFilter.value;
-  settings.filterBy = selectedFilter;
+  console.log("User selected to filter by " + selectedFilter);
   updateFilterBySettings(selectedFilter);
 }
 
@@ -84,6 +83,7 @@ function updateFilterBySettings(selectedFilter) {
 
 function getSortBy() {
   const selectedSorting = HTML.selectedSorting.value;
+  console.log("User selected to sort by " + selectedSorting);
   updateSortBySettings(selectedSorting);
 }
 
@@ -94,7 +94,7 @@ function updateSortBySettings(selectedSorting) {
 
 function getSortDir(event) {
   let selectedDirection = event.target.dataset.sortDirection;
-  console.log("user changed direction to " + selectedDirection);
+  console.log("User changed direction to " + selectedDirection);
   if (selectedDirection === "asc") {
     event.target.dataset.sortDirection = "desc";
     selectedDirection = "desc";
@@ -118,17 +118,13 @@ function updateSortDirDisplay() {
 }
 
 function buildList() {
-  console.log("buildList()");
   const filteredList = filterList(allStudents);
   const sortedList = sortList(filteredList);
-  // console.log(sortedList);
   displayList(sortedList);
 }
 
 function filterList(allStudents) {
   console.log("filterList()");
-  console.log(settings.filterBy);
-  console.log(allStudents);
   let filteredList = allStudents;
   if (settings.filterBy === "students") {
     filteredList = allStudents.filter(isNotExpelled);
@@ -160,8 +156,6 @@ function filterList(allStudents) {
 
 function sortList(filteredList) {
   console.log("sortList(filteredList)");
-  console.log(settings.sortDir);
-  console.log(settings.sortBy);
   let sortDir = 1;
   if (settings.sortDir === "desc") {
     sortDir = -1;
@@ -253,8 +247,7 @@ function showExpelAnimation() {
   HTML.studentCard.addEventListener("animationend", closeStudentCard);
 }
 
-function changeToExpelledCard(student) {
-  console.log(student);
+function changeToExpelledCard() {
   HTML.expelBtn.disabled = true;
   HTML.studentCard.style.filter = "grayscale(100%)";
 }
@@ -313,7 +306,6 @@ function getNickName(fullname) {
 function getMiddleName(fullname) {
   const trimmedName = fullname.trim().toLowerCase();
   const nameCount = trimmedName.split(" ");
-  // console.log(nameCount.length);
   if (nameCount.length > 2) {
     const middleName = trimmedName.substring(trimmedName.indexOf(" ") + 1, trimmedName.lastIndexOf(" "));
 
