@@ -74,7 +74,7 @@ function trackSelectors() {
 function getFilterBy() {
   const selectedFilter = HTML.selectedFilter.value;
   settings.filterBy = selectedFilter;
-  updateSortBySettings(selectedFilter);
+  updateFilterBySettings(selectedFilter);
 }
 
 function updateFilterBySettings(selectedFilter) {
@@ -161,6 +161,7 @@ function filterList(allStudents) {
 function sortList(filteredList) {
   console.log("sortList(filteredList)");
   console.log(settings.sortDir);
+  console.log(settings.sortBy);
   let sortDir = 1;
   if (settings.sortDir === "desc") {
     sortDir = -1;
