@@ -215,52 +215,16 @@ function displayStudent(student) {
     }
     function tryToAddToPrefects() {
       console.log("tryToAddToPrefects");
-      // console.log(prefects);
-      if (student.house === "Gryffindor") {
-        if (prefectsGryffindor.some((obj) => obj.gender === student.gender)) {
-          // openDialogSameGender();
-          HTML.dialogSameGender.classList.remove("hidden");
-        } else {
-          if (prefectsGryffindor.length === 2) {
-            console.log("There is already 2 prefects");
-          } else {
-            student.prefect = true;
-          }
-        }
-      } else if (student.house === "Slytherin") {
-        if (prefectsSlytherin.some((obj) => obj.gender === student.gender)) {
-          HTML.dialogSameGender.classList.remove("hidden");
-        } else {
-          if (prefectsSlytherin.length === 2) {
-            console.log("There is already 2 prefects");
-          } else {
-            student.prefect = true;
-          }
-        }
-      } else if (student.house === "Ravenclaw") {
-        if (prefectsRavenclaw.some((obj) => obj.gender === student.gender)) {
-          HTML.dialogSameGender.classList.remove("hidden");
-        } else {
-          if (prefectsRavenclaw.length === 2) {
-            console.log("There is already 2 prefects");
-          } else {
-            student.prefect = true;
-          }
-        }
+      console.log(prefects);
+      if (prefects.some((obj) => obj.house === student.house && obj.gender === student.gender)) {
+        console.log("There are prefects from same house with same gender");
       } else {
-        if (prefectsHufflepuff.some((obj) => obj.gender === student.gender)) {
-          HTML.dialogSameGender.classList.remove("hidden");
-        } else {
-          if (prefectsHufflepuff.length === 2) {
-            console.log("There is already 2 prefects");
-          } else {
-            student.prefect = true;
-          }
-        }
+        console.log("There are NO prefects from same house with same gender");
+        student.prefect = true;
       }
+      buildPrefectsList();
+      buildList();
     }
-    buildPrefectsLists();
-    buildList();
   }
   clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
   //build student card view
@@ -312,13 +276,9 @@ function displayStudent(student) {
   parent.appendChild(clone);
 }
 
-function buildPrefectsLists() {
+function buildPrefectsList() {
   prefects = allStudents.filter((student) => student.prefect === true);
   console.log(prefects);
-  prefectsGryffindor = prefects.filter((student) => student.house === "Gryffindor");
-  prefectsSlytherin = prefects.filter((student) => student.house === "Slytherin");
-  prefectsRavenclaw = prefects.filter((student) => student.house === "Ravenclaw");
-  prefectsHufflepuff = prefects.filter((student) => student.house === "Hufflepuff");
 }
 
 function showExpelAnimation() {
