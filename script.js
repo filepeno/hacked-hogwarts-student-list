@@ -38,6 +38,7 @@ function start() {
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
+  HTML.dialogSameGender = document.querySelector("article#sameGender");
   HTML.studentCard = document.querySelector("article#studentCard");
   HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
@@ -217,7 +218,8 @@ function displayStudent(student) {
       // console.log(prefects);
       if (student.house === "Gryffindor") {
         if (prefectsGryffindor.some((obj) => obj.gender === student.gender)) {
-          console.log("There is already prefects of same gender");
+          // openDialogSameGender();
+          HTML.dialogSameGender.classList.remove("hidden");
         } else {
           if (prefectsGryffindor.length === 2) {
             console.log("There is already 2 prefects");
@@ -227,7 +229,7 @@ function displayStudent(student) {
         }
       } else if (student.house === "Slytherin") {
         if (prefectsSlytherin.some((obj) => obj.gender === student.gender)) {
-          console.log("There is already prefects of same gender");
+          HTML.dialogSameGender.classList.remove("hidden");
         } else {
           if (prefectsSlytherin.length === 2) {
             console.log("There is already 2 prefects");
@@ -237,7 +239,7 @@ function displayStudent(student) {
         }
       } else if (student.house === "Ravenclaw") {
         if (prefectsRavenclaw.some((obj) => obj.gender === student.gender)) {
-          console.log("There is already prefects of same gender");
+          HTML.dialogSameGender.classList.remove("hidden");
         } else {
           if (prefectsRavenclaw.length === 2) {
             console.log("There is already 2 prefects");
@@ -247,7 +249,7 @@ function displayStudent(student) {
         }
       } else {
         if (prefectsHufflepuff.some((obj) => obj.gender === student.gender)) {
-          console.log("There is already prefects of same gender");
+          HTML.dialogSameGender.classList.remove("hidden");
         } else {
           if (prefectsHufflepuff.length === 2) {
             console.log("There is already 2 prefects");

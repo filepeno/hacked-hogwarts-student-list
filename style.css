@@ -50,7 +50,6 @@ h1 {
 h2 {
   text-align: center;
   font-size: 1.5rem;
-  color: var(--color-01);
 }
 
 section.selectors {
@@ -127,6 +126,24 @@ div.honours > div:first-child {
   opacity: 70%;
 }
 
+/* Dialog boxes */
+
+article.dialog {
+  position: absolute;
+  top: 40%;
+  left: 35%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color-02);
+  padding: 2rem;
+}
+
+button.closeDialog {
+  color: var(--color-01);
+}
+
+/* studentCard */
+
 button.openStudentCard {
   cursor: pointer;
 }
@@ -188,7 +205,8 @@ article#studentCard.hufflepuff {
   animation-fill-mode: forwards;
 }
 
-button.closeStudentCard {
+button.closeStudentCard,
+button.closeDialog {
   align-self: flex-end;
   cursor: pointer;
   border: none;
