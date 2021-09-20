@@ -4,10 +4,6 @@ const HTML = {};
 
 let allStudents = [];
 let prefects = [];
-let prefectsGryffindor = [];
-let prefectsSlytherin = [];
-let prefectsRavenclaw = [];
-let prefectsHufflepuff = [];
 
 const settings = {
   filterBy: "students",
@@ -38,7 +34,7 @@ function start() {
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
-  HTML.dialogSameGender = document.querySelector("article#sameGender");
+  HTML.sameGenderPrefectDialog = document.querySelector("article#sameGenderPrefect");
   HTML.studentCard = document.querySelector("article#studentCard");
   HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
@@ -216,15 +212,27 @@ function displayStudent(student) {
     function tryToAddToPrefects() {
       console.log("tryToAddToPrefects");
       console.log(prefects);
-      if (prefects.some((obj) => obj.house === student.house && obj.gender === student.gender)) {
-        console.log("There are prefects from same house with same gender");
+      if (prefects.some((obj) => obj.house === student.house)) {
+        const prefectsOfSameHouse = prefects.filter((prefect) => prefect.house === student.house);
+        console.log(prefectsOfSameHouse);
+        if (prefectsOfSameHouse.length === 2) {
+          console.log("there are already 2 prefects in this house");
+        } else {
+          if (prefectsOfSameHouse.some((prefect) => prefect.gender === student.gender)) {
+            console.log("there are already prefects of this gender in this house");
+            openSameGenderPrefectDialog(prefectsOfSameHouse);
+          } else {
+            console.log("there were no prefects of the same genre in this house");
+            student.prefect = true;
+          }
+        }
       } else {
-        console.log("There are NO prefects from same house with same gender");
+        console.log("There are NO prefects from same house gender");
         student.prefect = true;
       }
-      buildPrefectsList();
-      buildList();
     }
+    buildPrefectsList();
+    buildList();
   }
   clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
   //build student card view
@@ -276,9 +284,34 @@ function displayStudent(student) {
   parent.appendChild(clone);
 }
 
+function openSameGenderPrefectDialog(array) {
+  HTML.sameGenderPrefectDialog.classList.remove("hidden");
+  console.log(array);
+  //change content
+  document.querySelector("article#sameGenderPrefect span#gender").textContent = array[0].gender;
+  document.querySelector("article#sameGenderPrefect span#house").textContent = array[0].house;
+  if (array[0].gender === "girl") {
+    document.querySelector("article#sameGenderPrefect p span.student1").textContent = "Ms. " + array[0].lastName;
+  } else {
+    document.querySelector("article#sameGenderPrefect p span.student1").textContent = "Mr. " + array[0].lastName;
+  }
+  document.querySelector("article#sameGenderPrefect [data-action=remove1").addEventListener("click", removeSameGenderPrefect);
+  function removeSameGenderPrefect() {
+    array[0].prefect = false;
+    buildPrefectsList();
+    closeSameGenderPrefectDialog();
+  }
+  document.querySelector("article#sameGenderPrefect button.closeDialog").addEventListener("click", closeSameGenderPrefectDialog);
+}
+
+function closeSameGenderPrefectDialog() {
+  HTML.sameGenderPrefectDialog.classList.add("hidden");
+}
+
 function buildPrefectsList() {
   prefects = allStudents.filter((student) => student.prefect === true);
   console.log(prefects);
+  buildList();
 }
 
 function showExpelAnimation() {
