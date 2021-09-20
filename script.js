@@ -4,6 +4,10 @@ const HTML = {};
 
 let allStudents = [];
 let prefects = [];
+let prefectsGryffindor = [];
+let prefectsSlytherin = [];
+let prefectsRavenclaw = [];
+let prefectsHufflepuff = [];
 
 const settings = {
   filterBy: "students",
@@ -196,8 +200,8 @@ function displayStudent(student) {
     clone.querySelector(".name").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
   }
   const appointPrefectBtn = clone.querySelector(".appointPrefectBtn");
-  appointPrefectBtn.dataset.prefect = student.prefect;
   //change view of prefect button based on status
+  appointPrefectBtn.dataset.prefect = student.prefect;
   appointPrefectBtn.addEventListener("click", changePrefectStatus);
   //appoint a prefect
   function changePrefectStatus() {
@@ -210,20 +214,51 @@ function displayStudent(student) {
     }
     function tryToAddToPrefects() {
       console.log("tryToAddToPrefects");
-      console.log(prefects);
-      if (prefects.some((obj) => obj.gender === student.gender)) {
-        console.log("There is already prefects of same gender");
-      } else {
-        if (prefects.length === 2) {
-          console.log("There is already 2 prefects");
+      // console.log(prefects);
+      if (student.house === "Gryffindor") {
+        if (prefectsGryffindor.some((obj) => obj.gender === student.gender)) {
+          console.log("There is already prefects of same gender");
         } else {
-          student.prefect = true;
+          if (prefectsGryffindor.length === 2) {
+            console.log("There is already 2 prefects");
+          } else {
+            student.prefect = true;
+          }
+        }
+      } else if (student.house === "Slytherin") {
+        if (prefectsSlytherin.some((obj) => obj.gender === student.gender)) {
+          console.log("There is already prefects of same gender");
+        } else {
+          if (prefectsSlytherin.length === 2) {
+            console.log("There is already 2 prefects");
+          } else {
+            student.prefect = true;
+          }
+        }
+      } else if (student.house === "Ravenclaw") {
+        if (prefectsRavenclaw.some((obj) => obj.gender === student.gender)) {
+          console.log("There is already prefects of same gender");
+        } else {
+          if (prefectsRavenclaw.length === 2) {
+            console.log("There is already 2 prefects");
+          } else {
+            student.prefect = true;
+          }
+        }
+      } else {
+        if (prefectsHufflepuff.some((obj) => obj.gender === student.gender)) {
+          console.log("There is already prefects of same gender");
+        } else {
+          if (prefectsHufflepuff.length === 2) {
+            console.log("There is already 2 prefects");
+          } else {
+            student.prefect = true;
+          }
         }
       }
     }
-    buildPrefectsList();
+    buildPrefectsLists();
     buildList();
-    // changePrefectView(student);
   }
   clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
   //build student card view
@@ -275,17 +310,13 @@ function displayStudent(student) {
   parent.appendChild(clone);
 }
 
-function buildPrefectsList() {
+function buildPrefectsLists() {
   prefects = allStudents.filter((student) => student.prefect === true);
   console.log(prefects);
-}
-
-function changePrefectView(student) {
-  if (student.prefect === true) {
-    HTML.prefectBtn.classList.remove("faded");
-  } else {
-    HTML.prefectBtn.classList.add("faded");
-  }
+  prefectsGryffindor = prefects.filter((student) => student.house === "Gryffindor");
+  prefectsSlytherin = prefects.filter((student) => student.house === "Slytherin");
+  prefectsRavenclaw = prefects.filter((student) => student.house === "Ravenclaw");
+  prefectsHufflepuff = prefects.filter((student) => student.house === "Hufflepuff");
 }
 
 function showExpelAnimation() {
