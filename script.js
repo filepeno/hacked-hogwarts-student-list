@@ -217,6 +217,7 @@ function displayStudent(student) {
         console.log(prefectsOfSameHouse);
         if (prefectsOfSameHouse.length === 2) {
           console.log("there are already 2 prefects in this house");
+          openTooManyPrefectsDialog(prefectsOfSameHouse);
         } else {
           if (prefectsOfSameHouse.some((prefect) => prefect.gender === student.gender)) {
             console.log("there are already prefects of this gender in this house");
@@ -284,9 +285,41 @@ function displayStudent(student) {
   parent.appendChild(clone);
 }
 
-function openSameGenderPrefectDialog(array) {
-  HTML.sameGenderPrefectDialog.classList.remove("hidden");
+function openTooManyPrefectsDialog(array) {
   console.log(array);
+  document.querySelector("article#tooManyPrefects").classList.remove("hidden");
+  document.querySelector("article#tooManyPrefects span#house").textContent = array[0].house;
+  if (array[0].gender === "girl") {
+    document.querySelector("article#tooManyPrefects p span.student1").textContent = "Ms. " + array[0].lastName;
+  } else {
+    document.querySelector("article#tooManyPrefects p span.student1").textContent = "Mr. " + array[0].lastName;
+  }
+  if (array[1].gender === "girl") {
+    document.querySelector("article#tooManyPrefects p span.student2").textContent = "Ms. " + array[1].lastName;
+  } else {
+    document.querySelector("article#tooManyPrefects p span.student2").textContent = "Mr. " + array[1].lastName;
+  }
+  document.querySelector("article#tooManyPrefects [data-action=remove1").addEventListener("click", removePrefect1);
+  function removePrefect1() {
+    array[0].prefect = false;
+    buildPrefectsList();
+    closeTooManyPrefectsDialog();
+  }
+  document.querySelector("article#tooManyPrefects [data-action=remove2").addEventListener("click", removePrefect2);
+  function removePrefect2() {
+    array[1].prefect = false;
+    buildPrefectsList();
+    closeTooManyPrefectsDialog();
+  }
+  document.querySelector("article#tooManyPrefects button.closeDialog").addEventListener("click", closeTooManyPrefectsDialog);
+}
+
+function closeTooManyPrefectsDialog() {
+  document.querySelector("article#tooManyPrefects").classList.add("hidden");
+}
+
+function openSameGenderPrefectDialog(array) {
+  document.querySelector("article#sameGenderPrefect").classList.remove("hidden");
   //change content
   document.querySelector("article#sameGenderPrefect span#gender").textContent = array[0].gender;
   document.querySelector("article#sameGenderPrefect span#house").textContent = array[0].house;
@@ -305,7 +338,7 @@ function openSameGenderPrefectDialog(array) {
 }
 
 function closeSameGenderPrefectDialog() {
-  HTML.sameGenderPrefectDialog.classList.add("hidden");
+  document.querySelector("article#sameGenderPrefect").classList.add("hidden");
 }
 
 function buildPrefectsList() {
