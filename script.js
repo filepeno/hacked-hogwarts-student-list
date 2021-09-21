@@ -47,7 +47,6 @@ function start() {
   loadJSON();
   displayDefaultValues();
   trackSelectors();
-  trackSearchInput();
 }
 
 async function loadJSON() {
@@ -85,6 +84,7 @@ function trackSelectors() {
     element.addEventListener("click", getSortBy);
   });
   HTML.sortDirBtn.addEventListener("click", getSortDir);
+  HTML.searchInput.addEventListener("input", getSearchInput);
 }
 
 function getFilterBy() {
@@ -132,10 +132,6 @@ function updateSortDirSettings(selectedDirection) {
 
 function updateSortDirDisplay() {
   HTML.sortDirBtn.textContent = HTML.sortDirBtn.dataset.sortDirection;
-}
-
-function trackSearchInput() {
-  HTML.searchInput.addEventListener("input", getSearchInput);
 }
 
 function getSearchInput() {
