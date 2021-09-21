@@ -45,7 +45,7 @@ function start() {
   HTML.studentCard = document.querySelector("article#studentCard");
   HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
-  displayDefaultSelectionValues();
+  displayDefaultValues();
   trackSelectors();
   trackSearchInput();
 }
@@ -71,9 +71,10 @@ function prepareStudents(studentsData) {
   buildList(allStudents);
 }
 
-function displayDefaultSelectionValues() {
+function displayDefaultValues() {
   HTML.selectedFilter.value = "students";
   HTML.selectedSorting.value = "lastName";
+  HTML.searchInput.value = "";
 }
 
 function trackSelectors() {
