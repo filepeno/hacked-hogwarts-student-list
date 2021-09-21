@@ -58,7 +58,8 @@ section.selectors {
 }
 
 div.filterSelector,
-div.sortSelector {
+div.sortSelector,
+div.search {
   display: flex;
   flex-direction: column;
   margin-right: 1rem;

@@ -14,6 +14,7 @@ const settings = {
   filterBy: "students",
   sortBy: "lastName",
   sortDir: "asc",
+  search: "*",
 };
 
 const Student = {
@@ -39,12 +40,14 @@ function start() {
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
+  HTML.searchInput = document.querySelector("input[data-action=search");
   HTML.allDialogs = document.querySelectorAll("article.dialog");
   HTML.studentCard = document.querySelector("article#studentCard");
   HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
   displayDefaultSelectionValues();
   trackSelectors();
+  trackSearchInput();
 }
 
 async function loadJSON() {
@@ -130,11 +133,27 @@ function updateSortDirDisplay() {
   HTML.sortDirBtn.textContent = HTML.sortDirBtn.dataset.sortDirection;
 }
 
+function trackSearchInput() {
+  HTML.searchInput.addEventListener("input", getSearchInput);
+}
+
+function getSearchInput() {
+  console.log("getSearchInput()");
+  const searchInput = HTML.searchInput.value;
+  updateSearchSettings(searchInput);
+}
+
+function updateSearchSettings(searchInput) {
+  settings.search = searchInput;
+  buildList();
+}
+
 function buildList() {
   console.log(allStudents);
   const filteredList = filterList(allStudents);
   const sortedList = sortList(filteredList);
-  displayList(sortedList);
+  const searchResults = filterBySearch(sortedList);
+  displayList(searchResults);
 }
 
 function filterList(allStudents) {
@@ -182,6 +201,16 @@ function sortList(filteredList) {
     return 1 * sortDir;
   }
   return sortedList;
+}
+
+function filterBySearch(sortedList) {
+  console.log("filterBySearch(sortedList)");
+  if (settings.search === "*" || settings.search === "") {
+    return sortedList;
+  } else {
+    const searchResults = sortedList.filter((student) => student.lastName.includes(settings.search) || student.firstName.includes(settings.search));
+    return searchResults;
+  }
 }
 
 function displayList(students) {
