@@ -55,16 +55,12 @@ async function loadJSON() {
   const respFamilies = await fetch(urlFamilies);
   const familiesData = await respFamilies.json();
   // when loaded, prepare data
-  prepareFamilies(familiesData);
-  prepareStudents(studentsData);
+  prepareData(familiesData, studentsData);
 }
 
-function prepareFamilies(familiesData) {
+function prepareData(familiesData, studentsData) {
   pureBloodFamilies = familiesData.pure;
   halfBloodFamilies = familiesData.half;
-}
-
-function prepareStudents(studentsData) {
   allStudents = studentsData.map(prepareObject);
   console.log(allStudents);
   buildList(allStudents);
