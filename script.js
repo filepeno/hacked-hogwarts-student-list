@@ -208,7 +208,9 @@ function filterBySearch(sortedList) {
   if (settings.search === "*" || settings.search === "") {
     return sortedList;
   } else {
-    const searchResults = sortedList.filter((student) => student.lastName.includes(settings.search) || student.firstName.includes(settings.search));
+    const lowerCaseSearchInput = settings.search.toLowerCase();
+    console.log(lowerCaseSearchInput);
+    const searchResults = sortedList.filter((student) => student.lastName.toLowerCase().includes(lowerCaseSearchInput) || student.firstName.toLowerCase().includes(lowerCaseSearchInput));
     return searchResults;
   }
 }
