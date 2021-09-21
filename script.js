@@ -366,13 +366,13 @@ function openTooManyPrefectsDialog(array) {
   function removePrefect1() {
     array[0].prefect = false;
     buildPrefectsList();
-    closeTooManyPrefectsDialog();
+    closeDialog();
   }
   document.querySelector("article#tooManyPrefects [data-action=remove2").addEventListener("click", removePrefect2);
   function removePrefect2() {
     array[1].prefect = false;
     buildPrefectsList();
-    closeTooManyPrefectsDialog();
+    closeDialog();
   }
   document.querySelector("article#tooManyPrefects button.closeDialog").addEventListener("click", closeDialog);
 }
@@ -391,7 +391,7 @@ function openSameGenderPrefectDialog(array) {
   function removeSameGenderPrefect() {
     array[0].prefect = false;
     buildPrefectsList();
-    closeSameGenderPrefectDialog();
+    closeDialog();
   }
   document.querySelector("article#sameGenderPrefect button.closeDialog").addEventListener("click", closeDialog);
 }
