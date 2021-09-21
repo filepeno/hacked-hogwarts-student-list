@@ -1,8 +1,13 @@
 "use strict";
 
+const urlStudents = "https://petlatkea.dk/2021/hogwarts/students.json";
+const urlFamilies = "https://petlatkea.dk/2021/hogwarts/families.json";
+
 const HTML = {};
 
 let allStudents = [];
+let pureBloodFamilies = [];
+let halfBloodFamilies = [];
 let prefects = [];
 
 const settings = {
@@ -18,7 +23,7 @@ const Student = {
   nickName: "",
   img: "",
   house: "",
-  bloodType: "muggle",
+  bloodType: "",
   prefect: false,
   inquisitor: false,
   expelled: false,
@@ -42,17 +47,23 @@ function start() {
   trackSelectors();
 }
 
-function loadJSON() {
-  fetch("students.json")
-    .then((response) => response.json())
-    .then((jsonData) => {
-      // when loaded, prepare objects
-      prepareObjects(jsonData);
-    });
+async function loadJSON() {
+  const respStudents = await fetch(urlStudents);
+  const studentsData = await respStudents.json();
+  const respFamilies = await fetch(urlFamilies);
+  const familiesData = await respFamilies.json();
+  // when loaded, prepare data
+  prepareFamilies(familiesData);
+  prepareStudents(studentsData);
 }
 
-function prepareObjects(studentsJSON) {
-  allStudents = studentsJSON.map(prepareObject);
+function prepareFamilies(familiesData) {
+  pureBloodFamilies = familiesData.pure;
+  halfBloodFamilies = familiesData.half;
+}
+
+function prepareStudents(studentsData) {
+  allStudents = studentsData.map(prepareObject);
   console.log(allStudents);
   buildList(allStudents);
 }
@@ -375,6 +386,7 @@ function prepareObject(student) {
   studentObj.house = getHouse(student.house);
   studentObj.img = getImage(student.fullname);
   studentObj.gender = student.gender;
+  studentObj.bloodType = getBloodType(studentObj.lastName);
   return studentObj;
 }
 
@@ -442,4 +454,14 @@ function getImage(fullname) {
   const imgFileName = lastName + "_" + trimmedName[0] + ".png";
   return imgFileName;
   // image on FileZilla: http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/zabini_b.png
+}
+
+function getBloodType(lastName) {
+  if (halfBloodFamilies.some((obj) => obj === lastName)) {
+    return "half-blood";
+  } else if (pureBloodFamilies.some((obj) => obj === lastName)) {
+    return "pure-blood";
+  } else {
+    return "muggle";
+  }
 }
