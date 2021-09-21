@@ -5,6 +5,8 @@ const urlFamilies = "https://petlatkea.dk/2021/hogwarts/families.json";
 
 const HTML = {};
 
+let systemHacked = false;
+
 let allStudents = [];
 let pureBloodFamilies = [];
 let halfBloodFamilies = [];
@@ -28,6 +30,7 @@ const Student = {
   prefect: false,
   inquisitor: false,
   expelled: false,
+  hacker: false,
 };
 
 window.addEventListener("DOMContentLoaded", start);
@@ -63,7 +66,7 @@ function prepareData(familiesData, studentsData) {
   halfBloodFamilies = familiesData.half;
   allStudents = studentsData.map(prepareObject);
   console.log(allStudents);
-  buildList(allStudents);
+  buildList();
 }
 
 function displayDefaultValues() {
@@ -144,6 +147,7 @@ function updateSearchSettings(searchInput) {
 function buildList() {
   console.log(allStudents);
   const filteredList = filterList(allStudents);
+  console.log(filteredList);
   const sortedList = sortList(filteredList);
   const searchResults = filterBySearch(sortedList);
   displayList(searchResults);
@@ -222,7 +226,11 @@ function displayStudent(student) {
   // create clone
   const clone = template.cloneNode(true);
   // change content
-  clone.querySelector(".img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+  if (student.hacker) {
+    clone.querySelector(".img").src = student.img;
+  } else {
+    clone.querySelector(".img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+  }
   clone.querySelector(".img").alt = `Image of ${student.firstName} ${student.lastName}`;
   if (student.nickName === null && student.middleName === null) {
     clone.querySelector(".name").textContent = `${student.firstName} ${student.lastName}`;
@@ -302,7 +310,11 @@ function displayStudent(student) {
     console.log(student);
     HTML.studentCard.classList.remove("hidden");
     //change content
-    document.querySelector("#studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+    if (student.hacker === true) {
+      document.querySelector("#studentCard .img").src = student.img;
+    } else {
+      document.querySelector("#studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+    }
     document.querySelector("#studentCard .img").alt = `Image of ${student.firstName} ${student.lastName}`;
     if (student.nickName === null && student.middleName === null) {
       document.querySelector("#studentCard h3").textContent = `${student.firstName} ${student.lastName}`;
@@ -517,4 +529,33 @@ function getBloodType(lastName) {
   } else {
     return "muggle";
   }
+}
+
+//Hacking
+function hackTheSystem() {
+  console.log("system is HACKED");
+  systemHacked = true;
+  addHackerToStudents();
+  makeBloodTypesRandom();
+  buildList();
+}
+
+function addHackerToStudents() {
+  console.log("addHackerToStudents()");
+  const hacker = Object.create(Student);
+  console.log(hacker);
+  hacker.firstName = "Abu";
+  hacker.lastName = "Abba";
+  hacker.middleName = null;
+  hacker.nickName = null;
+  hacker.house = "Slytherin";
+  hacker.gender = "boy";
+  hacker.bloodType = "cold-blood";
+  hacker.img = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/hacker.jpg";
+  hacker.hacker = true;
+  allStudents.unshift(hacker);
+}
+
+function makeBloodTypesRandom() {
+  console.log("makeBloodTypesRandom()");
 }
