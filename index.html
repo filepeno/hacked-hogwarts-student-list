@@ -46,10 +46,10 @@
           </div>
           <div class="name">*Full Name*</div>
           <div class="honours">
-            <button class="appointPrefectBtn" data-field="prefect" data-prefect="false">⭐</button>
-            <button class="appointInquisitorBtn">💀</button>
+            <button data-field="prefect" data-prefect="false">⭐</button>
+            <button data-field="inquisitor" data-inquisitor="false">💀</button>
           </div>
-          <button class="openStudentCard">Show more info</button>
+          <button class="openStudentCard">More info</button>
         </article>
       </template>
 
@@ -76,18 +76,25 @@
         </div>
         <button id="expelBtn"></button>
       </article>
+
       <article class="dialog hidden" id="sameGenderPrefect">
         <button class="closeDialog">Close</button>
         <p>There can only be one <span id="gender">*gender*</span> prefect in each house.</p>
         <p>Please, choose another prefect, or remove the existing <span id="house">*House*</span> prefect:</p>
         <p><button data-action="remove1">remove</button> <span class="student1">*Full Name*</span></p>
       </article>
+
       <article class="dialog hidden" id="tooManyPrefects">
         <button class="closeDialog">Close</button>
         <p>There can be maximum two prefects in each house.</p>
         <p>If you want to appoint another <span id="house">*House*</span> prefect, please remove one of the existing prefects:</p>
         <p><button data-action="remove1">remove</button> <span class="student1">*Full Name*</span></p>
         <p><button data-action="remove2">remove</button> <span class="student2">*Full Name*</span></p>
+      </article>
+
+      <article class="dialog hidden" id="cannotAppointToInquisitors">
+        <button class="closeDialog">Close</button>
+        <p>Inquisitor squad members must be either pure-blood or from Slytherin</p>
       </article>
     </main>
     <script src="script.js"></script>

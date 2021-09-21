@@ -39,7 +39,7 @@ function start() {
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
   HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
-  HTML.sameGenderPrefectDialog = document.querySelector("article#sameGenderPrefect");
+  HTML.allDialogs = document.querySelectorAll("article.dialog");
   HTML.studentCard = document.querySelector("article#studentCard");
   HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
@@ -207,11 +207,12 @@ function displayStudent(student) {
   } else if (student.middleName === null) {
     clone.querySelector(".name").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
   }
-  const appointPrefectBtn = clone.querySelector(".appointPrefectBtn");
+  const appointPrefectBtn = clone.querySelector("[data-field=prefect]");
   //change view of prefect button based on status
   appointPrefectBtn.dataset.prefect = student.prefect;
   appointPrefectBtn.addEventListener("click", changePrefectStatus);
-  //appoint a prefect
+
+  //prefect-status
   function changePrefectStatus() {
     console.log("changePrefectStatus");
     console.log(student);
@@ -246,6 +247,31 @@ function displayStudent(student) {
     buildPrefectsList();
     buildList();
   }
+
+  const appointInquisitorBtn = clone.querySelector("[data-field=inquisitor]");
+  appointInquisitorBtn.dataset.inquisitor = student.inquisitor;
+  appointInquisitorBtn.addEventListener("click", changeInquisitorStatus);
+
+  //inquisitor-status
+  function changeInquisitorStatus() {
+    console.log("changeInquisitorStatus()");
+    if (student.inquisitor) {
+      student.inquisitor = false;
+    } else {
+      tryToAddToInquisitors();
+    }
+    function tryToAddToInquisitors() {
+      if (student.bloodType === "pure-blood") {
+        student.inquisitor = true;
+      } else if (student.house === "Slytherin") {
+        student.inquisitor = true;
+      } else {
+        openCannotAppointToInquisitorsDialog();
+      }
+    }
+    buildList();
+  }
+
   clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
   //build student card view
   function openStudentCard() {
@@ -263,6 +289,7 @@ function displayStudent(student) {
     }
     document.querySelector(".info .house").textContent = `House: ${student.house}`;
     document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
+
     //house colours
     if (student.house === "Gryffindor") {
       HTML.studentCard.classList.add("gryffindor");
@@ -292,6 +319,7 @@ function displayStudent(student) {
     }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
   }
+
   const parent = document.querySelector(".studentList");
   parent.appendChild(clone);
 }
@@ -322,11 +350,7 @@ function openTooManyPrefectsDialog(array) {
     buildPrefectsList();
     closeTooManyPrefectsDialog();
   }
-  document.querySelector("article#tooManyPrefects button.closeDialog").addEventListener("click", closeTooManyPrefectsDialog);
-}
-
-function closeTooManyPrefectsDialog() {
-  document.querySelector("article#tooManyPrefects").classList.add("hidden");
+  document.querySelector("article#tooManyPrefects button.closeDialog").addEventListener("click", closeDialog);
 }
 
 function openSameGenderPrefectDialog(array) {
@@ -345,11 +369,16 @@ function openSameGenderPrefectDialog(array) {
     buildPrefectsList();
     closeSameGenderPrefectDialog();
   }
-  document.querySelector("article#sameGenderPrefect button.closeDialog").addEventListener("click", closeSameGenderPrefectDialog);
+  document.querySelector("article#sameGenderPrefect button.closeDialog").addEventListener("click", closeDialog);
 }
 
-function closeSameGenderPrefectDialog() {
-  document.querySelector("article#sameGenderPrefect").classList.add("hidden");
+function openCannotAppointToInquisitorsDialog() {
+  document.querySelector("article#cannotAppointToInquisitors").classList.remove("hidden");
+  document.querySelector("article#cannotAppointToInquisitors button.closeDialog").addEventListener("click", closeDialog);
+}
+
+function closeDialog() {
+  HTML.allDialogs.forEach((dialog) => dialog.classList.add("hidden"));
 }
 
 function buildPrefectsList() {

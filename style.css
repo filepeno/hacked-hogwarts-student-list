@@ -113,17 +113,18 @@ div.honours > div:first-child {
   justify-content: space-between;
 }
 
-.appointPrefectBtn,
-.appointInquisitorBtn {
+[data-field="prefect"],
+[data-field="inquisitor"] {
   border: none;
   cursor: pointer;
   background: none;
   padding: 0.5rem;
 }
 
-[data-field="prefect"][data-prefect="false"] {
+[data-field="prefect"][data-prefect="false"],
+[data-field="inquisitor"][data-inquisitor="false"] {
   filter: grayscale(1);
-  opacity: 70%;
+  opacity: 40%;
 }
 
 /* Dialog boxes */
