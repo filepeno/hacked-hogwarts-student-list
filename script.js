@@ -46,7 +46,6 @@ function start() {
   HTML.searchInput = document.querySelector("input[data-action=search");
   HTML.allDialogs = document.querySelectorAll("article.dialog");
   HTML.studentCard = document.querySelector("article#studentCard");
-  HTML.expelBtn = document.querySelector("button#expelBtn");
   loadJSON();
   displayDefaultValues();
   trackSelectors();
@@ -307,8 +306,30 @@ function displayStudent(student) {
     }
     buildList();
   }
-
+  //expelled student
+  if (student.expelled === true) {
+    changeListViewToExpelled();
+    function changeListViewToExpelled() {
+      console.log("changeListViewToExpelled()");
+      clone.querySelector("button.expelBtn").classList.add("hidden");
+      clone.querySelector(".img").classList.add("faded");
+    }
+  }
   clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
+  if (student.gender === "girl") {
+    clone.querySelector("button.expelBtn").textContent = `Expel Ms. ${student.lastName}`;
+  } else {
+    clone.querySelector("button.expelBtn").textContent = `Expel Mr. ${student.lastName}`;
+  }
+  //expelling
+  clone.querySelector("button.expelBtn").addEventListener("click", expelStudent);
+  function expelStudent() {
+    student.expelled = true;
+    console.log("expelled " + student.lastName);
+    showExpelAnimation();
+    buildList();
+  }
+
   //build student card view
   function openStudentCard() {
     console.log(student);
@@ -341,17 +362,6 @@ function displayStudent(student) {
       HTML.studentCard.classList.add("hufflepuff");
     }
 
-    //expelling
-    if (student.gender === "girl") {
-      HTML.expelBtn.textContent = `Expel Ms. ${student.lastName}`;
-    } else {
-      HTML.expelBtn.textContent = `Expel Mr. ${student.lastName}`;
-    }
-    HTML.expelBtn.addEventListener("click", expelStudent);
-    function expelStudent() {
-      student.expelled = true;
-      showExpelAnimation();
-    }
     //expelled student
     if (student.expelled === true) {
       console.log(student);
@@ -435,19 +445,15 @@ function removeFromInquisitors(student) {
 
 function showExpelAnimation() {
   console.log("showExpelAnimation()");
-  HTML.studentCard.classList.add("expelAnimation");
-  HTML.studentCard.addEventListener("animationend", closeStudentCard);
 }
 
 function changeToExpelledCard() {
-  HTML.expelBtn.disabled = true;
   HTML.studentCard.style.filter = "grayscale(100%)";
 }
 
 function closeStudentCard() {
   HTML.studentCard.classList = "";
   HTML.studentCard.classList.add("hidden");
-  HTML.expelBtn.disabled = false;
   HTML.studentCard.style.filter = "grayscale(0%)";
   buildList();
 }
