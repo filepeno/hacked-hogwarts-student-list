@@ -375,8 +375,7 @@ function displayStudent(student) {
 
     //expelled student
     if (student.expelled === true) {
-      console.log(student);
-      changeToExpelledCard(student);
+      HTML.studentCard.classList.add("faded");
     }
     document.querySelector(".closeStudentCard").addEventListener("click", closeStudentCard);
   }
@@ -484,14 +483,9 @@ function showExpelAnimation(article) {
   article.addEventListener("animationend", buildList);
 }
 
-function changeToExpelledCard() {
-  HTML.studentCard.style.filter = "grayscale(100%)";
-}
-
 function closeStudentCard() {
   HTML.studentCard.classList = "";
   HTML.studentCard.classList.add("hidden");
-  HTML.studentCard.style.filter = "grayscale(0%)";
   buildList();
 }
 
@@ -585,10 +579,6 @@ function getBloodType(lastName) {
 }
 
 //Hacking
-
-// function trackSecretButton() {
-//   HTML.secretButton.addEventListener("click", hackTheSystem);
-// }
 
 function hackTheSystem() {
   console.log("system is HACKED");
