@@ -321,24 +321,17 @@ function displayStudent(student) {
   } else {
     clone.querySelector("button.expelBtn").textContent = `Expel Mr. ${student.lastName}`;
   }
+
   //expelling
-  clone.querySelector("button.expelBtn").addEventListener("click", openExpelStudentDialog);
-  function openExpelStudentDialog() {
+  clone.querySelector("button.expelBtn").addEventListener("click", checkIfHacker);
+  function checkIfHacker() {
     const studentClone = this.parentElement;
-    document.querySelector("article#expelStudentDialog").classList.remove("hidden");
-    if (student.gender === "girl") {
-      document.querySelector("article#expelStudentDialog span.student1").textContent = `Ms. ${student.lastName}`;
+    if (student.hacker === true) {
+      console.log("Hacker can't be expelled");
+      showExpelHackerAnimation(studentClone);
     } else {
-      document.querySelector("article#expelStudentDialog span.student1").textContent = `Mr. ${student.lastName}`;
+      openExpelStudentDialog(student, studentClone);
     }
-    document.querySelector("button[data-action=expel]").addEventListener("click", expelStudent);
-    function expelStudent() {
-      student.expelled = true;
-      console.log("expelled " + student.lastName);
-      closeDialog();
-      showExpelAnimation(studentClone);
-    }
-    document.querySelector("article#expelStudentDialog button.closeDialog").addEventListener("click", closeDialog);
   }
 
   //build student card view
@@ -452,6 +445,30 @@ function removeFromInquisitors(student) {
   console.log("remove inquisitor " + student.lastName);
   student.inquisitor = false;
   buildList();
+}
+
+function showExpelHackerAnimation(article) {
+  console.log("showExpelHackerAnimation()");
+  article.classList.add("shakeAnimation");
+  article.addEventListener("animationend", buildList);
+}
+
+function openExpelStudentDialog(student, studentClone) {
+  console.log("You are expelling " + student.lastName);
+  document.querySelector("article#expelStudentDialog").classList.remove("hidden");
+  if (student.gender === "girl") {
+    document.querySelector("article#expelStudentDialog span.student1").textContent = `Ms. ${student.lastName}`;
+  } else {
+    document.querySelector("article#expelStudentDialog span.student1").textContent = `Mr. ${student.lastName}`;
+  }
+  document.querySelector("button[data-action=expel]").addEventListener("click", expelStudent);
+  function expelStudent() {
+    student.expelled = true;
+    console.log("expelled " + student.lastName);
+    closeDialog();
+    showExpelAnimation(studentClone);
+  }
+  document.querySelector("article#expelStudentDialog button.closeDialog").addEventListener("click", closeDialog);
 }
 
 function showExpelAnimation(article) {
