@@ -486,7 +486,6 @@ function showExpelAnimation(article) {
 function closeStudentCard() {
   HTML.studentCard.classList = "";
   HTML.studentCard.classList.add("hidden");
-  buildList();
 }
 
 function prepareObject(student) {
