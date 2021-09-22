@@ -322,12 +322,23 @@ function displayStudent(student) {
     clone.querySelector("button.expelBtn").textContent = `Expel Mr. ${student.lastName}`;
   }
   //expelling
-  clone.querySelector("button.expelBtn").addEventListener("click", expelStudent);
-  function expelStudent() {
-    student.expelled = true;
-    console.log("expelled " + student.lastName);
-    showExpelAnimation();
-    buildList();
+  clone.querySelector("button.expelBtn").addEventListener("click", openExpelStudentDialog);
+  function openExpelStudentDialog() {
+    const studentClone = this.parentElement;
+    document.querySelector("article#expelStudentDialog").classList.remove("hidden");
+    if (student.gender === "girl") {
+      document.querySelector("article#expelStudentDialog span.student1").textContent = `Ms. ${student.lastName}`;
+    } else {
+      document.querySelector("article#expelStudentDialog span.student1").textContent = `Mr. ${student.lastName}`;
+    }
+    document.querySelector("button[data-action=expel]").addEventListener("click", expelStudent);
+    function expelStudent() {
+      student.expelled = true;
+      console.log("expelled " + student.lastName);
+      closeDialog();
+      showExpelAnimation(studentClone);
+    }
+    document.querySelector("article#expelStudentDialog button.closeDialog").addEventListener("click", closeDialog);
   }
 
   //build student card view
@@ -443,8 +454,10 @@ function removeFromInquisitors(student) {
   buildList();
 }
 
-function showExpelAnimation() {
+function showExpelAnimation(article) {
   console.log("showExpelAnimation()");
+  article.classList.add("expelAnimation");
+  article.addEventListener("animationend", buildList);
 }
 
 function changeToExpelledCard() {

@@ -100,6 +100,15 @@
         <button class="closeDialog">Close</button>
         <p>Inquisitor squad members must be either pure-blood or from Slytherin</p>
       </article>
+
+      <article class="dialog hidden" id="expelStudentDialog">
+        <p>Are you sure you want to expel <span class="student1">*Full Name*</span>?</p>
+        <p>This action cannot be undone, and student and their family will forever live in disgrace.</p>
+        <div id="expelChoices">
+          <p><button data-action="expel">Yes</button></p>
+          <p><button class="closeDialog">No</button></p>
+        </div>
+      </article>
     </main>
     <script src="script.js"></script>
   </body>
