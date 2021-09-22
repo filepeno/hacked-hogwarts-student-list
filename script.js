@@ -535,6 +535,7 @@ function getBloodType(lastName) {
 function hackTheSystem() {
   console.log("system is HACKED");
   systemHacked = true;
+  changeUiToHacked();
   addHackerToStudents();
   makeBloodTypesRandom();
   buildList();
@@ -558,4 +559,15 @@ function addHackerToStudents() {
 
 function makeBloodTypesRandom() {
   console.log("makeBloodTypesRandom()");
+  allStudents.forEach((student) => {
+    console.log(student.lastName + " was " + student.bloodType);
+    const bloodTypes = ["half-blood", "pure-blood", "muggle"];
+    const randomNumber = Math.floor(Math.random() * 3);
+    student.bloodType = bloodTypes[randomNumber];
+    console.log(student.lastName + " became " + student.bloodType);
+  });
+}
+
+function changeUiToHacked() {
+  console.log("changeUiToHacked()");
 }
