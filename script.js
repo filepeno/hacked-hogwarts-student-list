@@ -134,7 +134,14 @@ function updateSortDirDisplay() {
 
 function getSearchInput() {
   console.log("getSearchInput()");
-  const searchInput = HTML.searchInput.value;
+  let searchInput;
+  if (HTML.searchInput.value === "666") {
+    searchInput = "";
+    HTML.searchInput.value = "";
+    hackTheSystem();
+  } else {
+    searchInput = HTML.searchInput.value;
+  }
   updateSearchSettings(searchInput);
 }
 
@@ -578,6 +585,11 @@ function getBloodType(lastName) {
 }
 
 //Hacking
+
+// function trackSecretButton() {
+//   HTML.secretButton.addEventListener("click", hackTheSystem);
+// }
+
 function hackTheSystem() {
   console.log("system is HACKED");
   systemHacked = true;
