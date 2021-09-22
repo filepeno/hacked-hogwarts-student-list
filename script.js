@@ -560,11 +560,17 @@ function addHackerToStudents() {
 function makeBloodTypesRandom() {
   console.log("makeBloodTypesRandom()");
   allStudents.forEach((student) => {
-    console.log(student.lastName + " was " + student.bloodType);
-    const bloodTypes = ["half-blood", "pure-blood", "muggle"];
-    const randomNumber = Math.floor(Math.random() * 3);
-    student.bloodType = bloodTypes[randomNumber];
-    console.log(student.lastName + " became " + student.bloodType);
+    if (student.bloodType === "pure-blood") {
+      console.log(student);
+      const bloodTypes = ["half-blood", "pure-blood", "muggle"];
+      const randomNumber = Math.floor(Math.random() * 3);
+      student.bloodType = bloodTypes[randomNumber];
+      console.log(student.lastName + " became " + student.bloodType);
+    } else {
+      console.log(student);
+      student.bloodType = "pure-blood";
+      console.log(student.lastName + " became pure-blood");
+    }
   });
 }
 
