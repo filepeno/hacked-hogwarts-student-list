@@ -538,6 +538,7 @@ function hackTheSystem() {
   changeUiToHacked();
   addHackerToStudents();
   makeBloodTypesRandom();
+  trackSelectorsToRandomizeBloodType();
   buildList();
 }
 
@@ -557,6 +558,15 @@ function addHackerToStudents() {
   allStudents.unshift(hacker);
 }
 
+function trackSelectorsToRandomizeBloodType() {
+  HTML.filterSelector.forEach((element) => {
+    element.addEventListener("click", makeBloodTypesRandom);
+  });
+  HTML.sortSelector.forEach((element) => {
+    element.addEventListener("click", makeBloodTypesRandom);
+  });
+}
+
 function makeBloodTypesRandom() {
   console.log("makeBloodTypesRandom()");
   allStudents.forEach((student) => {
@@ -572,6 +582,7 @@ function makeBloodTypesRandom() {
       console.log(student.lastName + " became pure-blood");
     }
   });
+  buildList();
 }
 
 function changeUiToHacked() {
