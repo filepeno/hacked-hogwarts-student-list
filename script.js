@@ -293,10 +293,14 @@ function displayStudent(student) {
       tryToAddToInquisitors();
     }
     function tryToAddToInquisitors() {
-      if (student.bloodType === "pure-blood") {
+      if (student.bloodType === "pure-blood" || student.house === "Slytherin") {
         student.inquisitor = true;
-      } else if (student.house === "Slytherin") {
-        student.inquisitor = true;
+        if (systemHacked === true) {
+          setTimeout(getInquisitor, 5000);
+          function getInquisitor() {
+            removeFromInquisitors(student);
+          }
+        }
       } else {
         openCannotAppointToInquisitorsDialog();
       }
@@ -420,6 +424,12 @@ function closeDialog() {
 function buildPrefectsList() {
   prefects = allStudents.filter((student) => student.prefect === true);
   console.log(prefects);
+  buildList();
+}
+
+function removeFromInquisitors(student) {
+  console.log("remove inquisitor " + student.lastName);
+  student.inquisitor = false;
   buildList();
 }
 
