@@ -53,6 +53,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+ul {
+  list-style: none;
+}
+
 section.selectors {
   display: flex;
   margin-top: 1rem;
@@ -102,9 +106,9 @@ div.name {
   margin: 1rem;
 }
 
-div.honours {
+/* div.honours {
   display: flex;
-}
+} */
 
 div.honours > div:first-child {
   margin-right: 1rem;
@@ -162,12 +166,12 @@ article#studentCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
   border-style: outset;
   border-width: 1rem;
   border-radius: 0.5rem;
   width: 18rem;
-  height: 24rem;
+  height: 21rem;
   color: var(--color-05);
 }
 
@@ -225,11 +229,18 @@ article#studentCard.hufflepuff div.crest {
   background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/hufflepuff_crest.svg);
 }
 
-.info {
-  /* width: 16rem; */
+div.stroke {
+  margin: 1rem 0 1rem 0;
+  align-self: center;
+  height: 1px;
+  width: 6rem;
+  background-color: var(--color-01);
 }
-.info ul {
-  list-style: none;
+
+ul.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button.closeStudentCard,
