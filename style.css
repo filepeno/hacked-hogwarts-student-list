@@ -199,6 +199,11 @@ article#studentCard.gryffindor div.crest {
   background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/gryffindor_crest.svg);
 }
 
+article#studentCard.gryffindor .icon,
+article#studentCard.gryffindor .stroke {
+  filter: invert(78%) sepia(95%) saturate(779%) hue-rotate(330deg) brightness(96%) contrast(95%);
+}
+
 article#studentCard.slytherin {
   background-color: var(--slyt-bg-color);
   color: var(--slyt-color);
@@ -207,6 +212,11 @@ article#studentCard.slytherin {
 
 article#studentCard.slytherin div.crest {
   background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/slytherin_crest.svg);
+}
+
+article#studentCard.slytherin .icon,
+article#studentCard.slytherin .stroke {
+  filter: invert(22%) sepia(45%) saturate(528%) hue-rotate(89deg) brightness(94%) contrast(97%);
 }
 
 article#studentCard.ravenclaw {
@@ -219,6 +229,11 @@ article#studentCard.ravenclaw div.crest {
   background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/ravenclaw_crest.svg);
 }
 
+article#studentCard.ravenclaw .icon,
+article#studentCard.ravenclaw .stroke {
+  filter: invert(44%) sepia(45%) saturate(874%) hue-rotate(357deg) brightness(96%) contrast(86%);
+}
+
 article#studentCard.hufflepuff {
   background-color: var(--huff-bg-color);
   color: var(--huff-color);
@@ -229,18 +244,38 @@ article#studentCard.hufflepuff div.crest {
   background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/hufflepuff_crest.svg);
 }
 
+article#studentCard.hufflepuff .icon,
+article#studentCard.hufflepuff .stroke {
+  filter: invert(85%) sepia(54%) saturate(2024%) hue-rotate(355deg) brightness(98%) contrast(107%);
+}
+
 div.stroke {
   margin: 1rem 0 1rem 0;
   align-self: center;
   height: 1px;
   width: 6rem;
-  background-color: var(--color-01);
+  background-color: black;
 }
 
 ul.info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+}
+
+#houseIcon,
+#bloodIcon {
+  height: 1.5rem;
+  margin-right: 1rem;
+}
+
+ul.info li {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+ul.info li span {
+  align-self: center;
 }
 
 button.closeStudentCard,

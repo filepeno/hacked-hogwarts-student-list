@@ -359,8 +359,8 @@ function displayStudent(student) {
     } else if (student.middleName === null) {
       document.querySelector("#studentCard h3").textContent = `${student.firstName} ${student.nickName} ${student.lastName}`;
     }
-    document.querySelector(".info .house").textContent = `House: ${student.house}`;
-    document.querySelector(".info .bloodType").textContent = `Blood type: ${student.bloodType}`;
+    document.querySelector(".info li.house span").textContent = `${student.house}`;
+    document.querySelector(".info li.bloodType span").textContent = `${student.bloodType}`;
 
     //house colours
     if (student.house === "Gryffindor") {
