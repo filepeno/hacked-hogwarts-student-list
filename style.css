@@ -149,8 +149,13 @@ article.dialog {
   padding: 2rem;
 }
 
-button.closeDialog {
-  color: var(--color-01);
+.closeBtn {
+  filter: invert(66%) sepia(49%) saturate(1678%) hue-rotate(11deg) brightness(89%) contrast(106%);
+}
+
+/* makes button white */
+.closeBtn:hover {
+  filter: invert(94%) sepia(6%) saturate(0%) hue-rotate(3deg) brightness(105%) contrast(105%);
 }
 
 /* studentCard */
@@ -171,8 +176,12 @@ article#studentCard {
   border-width: 1rem;
   border-radius: 0.5rem;
   width: 18rem;
-  height: 21rem;
+  height: 21.5rem;
   color: var(--color-05);
+}
+
+.closeBtn {
+  height: 1.2rem;
 }
 
 div.crest {
@@ -200,7 +209,8 @@ article#studentCard.gryffindor div.crest {
 }
 
 article#studentCard.gryffindor .icon,
-article#studentCard.gryffindor .stroke {
+article#studentCard.gryffindor .stroke,
+article#studentCard.gryffindor .closeBtn {
   filter: invert(78%) sepia(95%) saturate(779%) hue-rotate(330deg) brightness(96%) contrast(95%);
 }
 
@@ -215,7 +225,8 @@ article#studentCard.slytherin div.crest {
 }
 
 article#studentCard.slytherin .icon,
-article#studentCard.slytherin .stroke {
+article#studentCard.slytherin .stroke,
+article#studentCard.slytherin .closeBtn {
   filter: invert(22%) sepia(45%) saturate(528%) hue-rotate(89deg) brightness(94%) contrast(97%);
 }
 
@@ -230,7 +241,8 @@ article#studentCard.ravenclaw div.crest {
 }
 
 article#studentCard.ravenclaw .icon,
-article#studentCard.ravenclaw .stroke {
+article#studentCard.ravenclaw .stroke,
+article#studentCard.ravenclaw .closeBtn {
   filter: invert(44%) sepia(45%) saturate(874%) hue-rotate(357deg) brightness(96%) contrast(86%);
 }
 
@@ -245,8 +257,16 @@ article#studentCard.hufflepuff div.crest {
 }
 
 article#studentCard.hufflepuff .icon,
-article#studentCard.hufflepuff .stroke {
+article#studentCard.hufflepuff .stroke,
+article#studentCard.hufflepuff .closeBtn {
   filter: invert(85%) sepia(54%) saturate(2024%) hue-rotate(355deg) brightness(98%) contrast(107%);
+}
+
+article#studentCard.gryffindor .closeBtn:hover,
+article#studentCard.slytherin .closeBtn:hover,
+article#studentCard.hufflepuff .closeBtn:hover,
+article#studentCard.ravenclaw .closeBtn:hover {
+  filter: invert(94%) sepia(6%) saturate(0%) hue-rotate(3deg) brightness(105%) contrast(105%);
 }
 
 div.stroke {
