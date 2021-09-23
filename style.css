@@ -12,6 +12,7 @@
   --color-03: rgb(56, 56, 56);
   --color-04: rgb(82, 82, 82);
   --color-05: rgb(0, 0, 0);
+  --color-link: rgb(134, 134, 134);
   --gryf-bg-color: #740001;
   --gryf-color: #eeba30;
   --slyt-bg-color: #aaaaaa;
@@ -165,9 +166,23 @@ article#studentCard {
   border-style: outset;
   border-width: 1rem;
   border-radius: 0.5rem;
-  width: 19rem;
+  width: 18rem;
   height: 24rem;
   color: var(--color-05);
+}
+
+div.crest {
+  width: 8rem;
+  height: 9.65rem;
+  position: absolute;
+  right: 9rem;
+  top: -1rem;
+  background-size: 100%;
+}
+
+#studentCard div.imgWrapper {
+  z-index: 2;
+  position: relative;
 }
 
 article#studentCard.gryffindor {
@@ -176,10 +191,18 @@ article#studentCard.gryffindor {
   border-color: var(--gryf-color);
 }
 
+article#studentCard.gryffindor div.crest {
+  background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/gryffindor_crest.svg);
+}
+
 article#studentCard.slytherin {
   background-color: var(--slyt-bg-color);
   color: var(--slyt-color);
   border-color: var(--slyt-color);
+}
+
+article#studentCard.slytherin div.crest {
+  background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/slytherin_crest.svg);
 }
 
 article#studentCard.ravenclaw {
@@ -188,10 +211,18 @@ article#studentCard.ravenclaw {
   border-color: var(--rave-color);
 }
 
+article#studentCard.ravenclaw div.crest {
+  background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/ravenclaw_crest.svg);
+}
+
 article#studentCard.hufflepuff {
   background-color: var(--huff-bg-color);
   color: var(--huff-color);
   border-color: var(--huff-color);
+}
+
+article#studentCard.hufflepuff div.crest {
+  background-image: url(http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/hufflepuff_crest.svg);
 }
 
 .info {
@@ -200,10 +231,6 @@ article#studentCard.hufflepuff {
 .info ul {
   list-style: none;
 }
-
-/* article.studentCard.slytherin {
-  background-color: ;
-} */
 
 button.closeStudentCard,
 button.closeDialog {
@@ -215,6 +242,22 @@ button.closeDialog {
 
 .hidden {
   visibility: hidden;
+}
+
+footer {
+  margin-top: 4rem;
+  color: var(--color-04);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+footer section {
+  margin: 1rem 0 1rem 0;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
 }
 
 /* animations */
