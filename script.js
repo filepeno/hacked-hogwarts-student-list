@@ -163,6 +163,7 @@ function buildList() {
   console.log(filteredList);
   const sortedList = sortList(filteredList);
   const searchResults = filterBySearch(sortedList);
+  displayAndHideNoSearchResults(searchResults);
   displayList(searchResults);
 }
 
@@ -222,6 +223,14 @@ function filterBySearch(sortedList) {
     console.log(lowerCaseSearchInput);
     const searchResults = sortedList.filter((student) => student.lastName.toLowerCase().includes(lowerCaseSearchInput) || student.firstName.toLowerCase().includes(lowerCaseSearchInput));
     return searchResults;
+  }
+}
+
+function displayAndHideNoSearchResults(results) {
+  if (results.length === 0) {
+    document.querySelector("article#noResults").classList.remove("hidden");
+  } else {
+    document.querySelector("article#noResults").classList.add("hidden");
   }
 }
 

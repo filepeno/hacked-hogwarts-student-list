@@ -326,6 +326,11 @@ button.closeDialog {
   visibility: hidden;
 }
 
+article#noResults {
+  margin: 5rem 0 5rem 0;
+  text-align: center;
+}
+
 footer {
   margin-top: 4rem;
   color: var(--color-04);
