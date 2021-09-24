@@ -66,6 +66,7 @@ button {
 section.selectors {
   display: flex;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 div.filterSelector,
@@ -74,10 +75,6 @@ div.search {
   display: flex;
   flex-direction: column;
   margin-right: 1rem;
-}
-
-select#filter {
-  /* width: 10rem; */
 }
 
 section.studentList {
