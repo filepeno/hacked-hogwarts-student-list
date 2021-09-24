@@ -13,7 +13,8 @@
   --color-04: rgb(82, 82, 82);
   --color-05: rgb(0, 0, 0);
   --color-link: rgb(134, 134, 134);
-  --inquisitor-shadow: #2bcea5;
+  --inquisitor-shadow: #34ebc3;
+  --prefect-border: #ffe15d;
   --gryf-bg-color: #740001;
   --gryf-color: #eeba30;
   --slyt-bg-color: #aaaaaa;
@@ -91,13 +92,8 @@ article.student {
   align-items: center;
   color: var(--color-02);
   background-color: var(--color-03);
-  height: 250px;
-}
-
-div.imgWrapper {
-  margin: 1rem;
-  height: 108px;
-  width: 114px;
+  padding: 1rem;
+  /* height: 250px; */
 }
 
 .img {
@@ -210,7 +206,7 @@ div.crest {
   background-size: 100%;
 }
 
-#studentCard div.imgWrapper {
+#studentCard .img {
   z-index: 2;
   position: relative;
 }
@@ -396,6 +392,10 @@ a {
 }
 
 .inquisitorShadow {
+  box-shadow: 0px 5px 16px 4px var(--inquisitor-shadow);
+}
+
+.addInquisitorShadow {
   animation: shadow 0.2s linear;
   animation-fill-mode: forwards;
 }
@@ -407,13 +407,17 @@ a {
 }
 
 .prefectBorder {
+  outline: solid 3px var(--prefect-border);
+}
+
+.addPrefectBorder {
   animation: outline 0.2s linear;
   animation-fill-mode: forwards;
 }
 
 @keyframes outline {
   100% {
-    outline: solid 3px var(--color-01);
+    outline: solid 3px var(--prefect-border);
   }
 }
 
