@@ -44,18 +44,20 @@
       <section class="studentList"></section>
 
       <template id="studentListTemplate">
-        <article class="student">
-          <div class="imgWrapper">
-            <img src="" alt="" class="img" />
-          </div>
-          <div class="name">*Full Name*</div>
-          <div class="honours">
-            <button data-field="prefect" data-prefect="false">⭐</button>
-            <button data-field="inquisitor" data-inquisitor="false">💀</button>
-          </div>
-          <button class="openStudentCard">More info</button>
-          <button class="expelBtn"></button>
-        </article>
+        <div class="studentWrapper">
+          <article class="student">
+            <div class="imgWrapper">
+              <img src="" alt="" class="img" />
+            </div>
+            <div class="name">*Full Name*</div>
+            <div class="honours">
+              <button data-field="prefect" data-prefect="false">⭐</button>
+              <button data-field="inquisitor" data-inquisitor="false">💀</button>
+            </div>
+            <button class="openStudentCard">More info</button>
+            <button class="expelBtn"></button>
+          </article>
+        </div>
       </template>
 
       <article id="studentCard" class="hidden">

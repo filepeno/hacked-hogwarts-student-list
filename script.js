@@ -248,6 +248,12 @@ function displayStudent(student) {
   // create clone
   const clone = template.cloneNode(true);
   // change content
+  if (student.prefect) {
+    clone.querySelector(".student").classList.add("prefectBorder");
+  }
+  if (student.inquisitor) {
+    clone.querySelector(".studentWrapper").classList.add("inquisitorShadow");
+  }
   if (student.hacker) {
     clone.querySelector(".img").src = student.img;
   } else {
