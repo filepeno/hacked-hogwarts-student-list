@@ -330,11 +330,8 @@ function displayStudent(student) {
     }
   }
   clone.querySelector(".openStudentCard").addEventListener("click", openStudentCard);
-  if (student.gender === "girl") {
-    clone.querySelector("button.expelBtn").textContent = `Expel Ms. ${student.lastName}`;
-  } else {
-    clone.querySelector("button.expelBtn").textContent = `Expel Mr. ${student.lastName}`;
-  }
+  const title = defineMsOrMr(student);
+  clone.querySelector("button.expelBtn").textContent = `Expel ${title} ${student.lastName}`;
 
   //expelling
   clone.querySelector("button.expelBtn").addEventListener("click", checkIfHacker);
@@ -391,20 +388,22 @@ function displayStudent(student) {
   parent.appendChild(clone);
 }
 
+function defineMsOrMr(student) {
+  if (student.gender === "girl") {
+    return "Ms.";
+  } else {
+    return "Mr.";
+  }
+}
+
 function openTooManyPrefectsDialog(array) {
   console.log(array);
   document.querySelector("article#tooManyPrefects").classList.remove("hidden");
   document.querySelector("article#tooManyPrefects span#house").textContent = array[0].house;
-  if (array[0].gender === "girl") {
-    document.querySelector("article#tooManyPrefects p span.student1").textContent = "Ms. " + array[0].lastName;
-  } else {
-    document.querySelector("article#tooManyPrefects p span.student1").textContent = "Mr. " + array[0].lastName;
-  }
-  if (array[1].gender === "girl") {
-    document.querySelector("article#tooManyPrefects p span.student2").textContent = "Ms. " + array[1].lastName;
-  } else {
-    document.querySelector("article#tooManyPrefects p span.student2").textContent = "Mr. " + array[1].lastName;
-  }
+  const title1 = defineMsOrMr(array[0]);
+  document.querySelector("article#tooManyPrefects p span.student1").textContent = `${title1} ${array[0].lastName}`;
+  const title2 = defineMsOrMr(array[1]);
+  document.querySelector("article#tooManyPrefects p span.student2").textContent = `${title2} ${array[1].lastName}`;
   document.querySelector("article#tooManyPrefects [data-action=remove1").addEventListener("click", removePrefect1);
   function removePrefect1() {
     array[0].prefect = false;
@@ -425,11 +424,8 @@ function openSameGenderPrefectDialog(array) {
   //change content
   document.querySelector("article#sameGenderPrefect span#gender").textContent = array[0].gender;
   document.querySelector("article#sameGenderPrefect span#house").textContent = array[0].house;
-  if (array[0].gender === "girl") {
-    document.querySelector("article#sameGenderPrefect p span.student1").textContent = "Ms. " + array[0].lastName;
-  } else {
-    document.querySelector("article#sameGenderPrefect p span.student1").textContent = "Mr. " + array[0].lastName;
-  }
+  const title = defineMsOrMr(array[0]);
+  document.querySelector("article#sameGenderPrefect p span.student1").textContent = `${title} ${array[0].lastName}`;
   document.querySelector("article#sameGenderPrefect [data-action=remove1").addEventListener("click", removeSameGenderPrefect);
   function removeSameGenderPrefect() {
     array[0].prefect = false;
@@ -469,11 +465,8 @@ function showExpelHackerAnimation(article) {
 function openExpelStudentDialog(student, studentClone) {
   console.log("You are expelling " + student.lastName);
   document.querySelector("article#expelStudentDialog").classList.remove("hidden");
-  if (student.gender === "girl") {
-    document.querySelector("article#expelStudentDialog span.student1").textContent = `Ms. ${student.lastName}`;
-  } else {
-    document.querySelector("article#expelStudentDialog span.student1").textContent = `Mr. ${student.lastName}`;
-  }
+  const title = defineMsOrMr(student);
+  document.querySelector("article#expelStudentDialog span.student1").textContent = `${title} ${student.lastName}`;
   document.querySelector("button[data-action=expel]").addEventListener("click", expelStudent);
   function expelStudent() {
     student.expelled = true;
