@@ -140,9 +140,10 @@ div.honours > div:first-child {
 /* Dialog boxes */
 
 article.dialog {
-  position: absolute;
-  top: 40%;
-  left: 35%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   background-color: var(--bg-color-02);
@@ -150,6 +151,7 @@ article.dialog {
 }
 
 .closeBtn {
+  align-self: flex-end;
   filter: invert(66%) sepia(49%) saturate(1678%) hue-rotate(11deg) brightness(89%) contrast(106%);
 }
 
@@ -165,9 +167,10 @@ button.openStudentCard {
 }
 
 article#studentCard {
-  position: absolute;
-  top: 20%;
-  left: 35%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
