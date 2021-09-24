@@ -15,6 +15,7 @@
   --color-link: rgb(134, 134, 134);
   --inquisitor-shadow: #34ebc3;
   --prefect-border: #ffe15d;
+  --color-expel: rgb(92, 11, 0);
   --gryf-bg-color: #740001;
   --gryf-color: #eeba30;
   --slyt-bg-color: #aaaaaa;
@@ -143,6 +144,28 @@ div#sortByAndDir {
 [data-field="inquisitor"][data-inquisitor="false"] {
   filter: grayscale(1);
   opacity: 40%;
+}
+
+button.expelBtn,
+button.openStudentCard {
+  background: var(--color-04);
+  /* border-radius: 0.7rem; */
+  padding: 4px;
+}
+
+button.openStudentCard {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+button.openStudentCard:hover {
+  color: white;
+  background-color: var(--color-02);
+}
+
+button.expelBtn:hover {
+  color: white;
+  background-color: var(--color-expel);
 }
 
 .faded {
