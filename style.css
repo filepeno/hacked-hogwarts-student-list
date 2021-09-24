@@ -81,9 +81,13 @@ div.search {
 
 section.studentList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-gap: 3rem 1rem;
   margin-top: 2rem;
+}
+
+div.studentWrapper {
+  margin: 0 auto;
 }
 
 article.student {
@@ -93,7 +97,9 @@ article.student {
   color: var(--color-02);
   background-color: var(--color-03);
   padding: 1rem;
-  /* height: 250px; */
+  width: 190px;
+  /* height: 260px;
+  width: 190px; */
 }
 
 .img {
