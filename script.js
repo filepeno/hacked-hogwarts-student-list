@@ -42,7 +42,7 @@ function start() {
   HTML.selectedFilter = document.querySelector("select#filter");
   HTML.sortSelector = document.querySelectorAll("select#sort > option");
   HTML.selectedSorting = document.querySelector("select#sort");
-  HTML.sortDirBtn = document.querySelector('button[data-action="sort"]');
+  HTML.sortDirBtn = document.querySelector('img[data-action="sort"]');
   HTML.searchInput = document.querySelector("input[data-action=search");
   HTML.allDialogs = document.querySelectorAll("article.dialog");
   HTML.studentCard = document.querySelector("article#studentCard");
@@ -111,25 +111,32 @@ function getSortDir(event) {
   let selectedDirection = event.target.dataset.sortDirection;
   console.log("User changed direction to " + selectedDirection);
   if (selectedDirection === "asc") {
-    event.target.dataset.sortDirection = "desc";
+    HTML.sortDirBtn.dataset.sortDirection = "desc";
     selectedDirection = "desc";
     //TO DO change icon
   } else {
-    event.target.dataset.sortDirection = "asc";
+    HTML.sortDirBtn.dataset.sortDirection = "asc";
     selectedDirection = "asc";
     //TO DO change icon
   }
+  console.log(selectedDirection);
+  updateSortDirDisplay(selectedDirection);
   updateSortDirSettings(selectedDirection);
-  updateSortDirDisplay();
 }
 
 function updateSortDirSettings(selectedDirection) {
   settings.sortDir = selectedDirection;
+  console.log(settings.sortDir);
+
   buildList();
 }
 
-function updateSortDirDisplay() {
-  HTML.sortDirBtn.textContent = HTML.sortDirBtn.dataset.sortDirection;
+function updateSortDirDisplay(selectedDirection) {
+  if (selectedDirection === "desc") {
+    document.querySelector("img#arrows").classList.add("rotate");
+  } else {
+    document.querySelector("img#arrows").classList.remove("rotate");
+  }
 }
 
 function getSearchInput() {

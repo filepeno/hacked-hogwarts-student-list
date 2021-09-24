@@ -7,7 +7,7 @@
 :root {
   --bg-color-01: rgb(29, 29, 29);
   --bg-color-02: rgb(34, 26, 22);
-  --color-01: rgb(201, 164, 3);
+  --color-01: #c9a403;
   --color-02: rgb(194, 119, 33);
   --color-03: rgb(56, 56, 56);
   --color-04: rgb(82, 82, 82);
@@ -55,6 +55,12 @@ h2 {
 
 ul {
   list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 section.selectors {
@@ -106,6 +112,15 @@ div.name {
   margin: 1rem;
 }
 
+img#arrows {
+  height: 1.2rem;
+  margin-left: 0.3rem;
+}
+
+div#sortByAndDir {
+  display: flex;
+}
+
 /* div.honours {
   display: flex;
 } */
@@ -135,6 +150,10 @@ div.honours > div:first-child {
 
 .faded {
   filter: grayscale(1);
+}
+
+.rotate {
+  transform: rotate(180deg);
 }
 
 /* Dialog boxes */
@@ -304,9 +323,6 @@ ul.info li span {
 button.closeStudentCard,
 button.closeDialog {
   align-self: flex-end;
-  cursor: pointer;
-  border: none;
-  background: none;
 }
 
 .hidden {

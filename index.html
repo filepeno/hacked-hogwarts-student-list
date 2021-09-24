@@ -28,12 +28,12 @@
         </div>
         <div class="sortSelector">
           <label for="sort">Sort by:</label>
-          <div class="sortByAndDir">
+          <div id="sortByAndDir">
             <select name="sort" id="sort">
               <option value="lastName">Last name</option>
               <option value="firstName">First name</option>
             </select>
-            <button data-action="sort" data-sort-direction="asc">asc</button>
+            <button id="sortDirection"><img data-action="sort" data-sort-direction="asc" id="arrows" src="/assets/img/arrows_up_down.svg" alt="arrows" /></button>
           </div>
         </div>
         <div class="search">
