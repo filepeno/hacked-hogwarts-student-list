@@ -143,9 +143,14 @@ function getSearchInput() {
   console.log("getSearchInput()");
   let searchInput;
   if (HTML.searchInput.value === "666") {
-    searchInput = "";
-    HTML.searchInput.value = "";
-    hackTheSystem();
+    const systemHacked = checkIfHacked();
+    if (systemHacked === false) {
+      hackTheSystem();
+      searchInput = "";
+      HTML.searchInput.value = "";
+    } else {
+      searchInput = "666";
+    }
   } else {
     searchInput = HTML.searchInput.value;
   }
@@ -587,6 +592,14 @@ function getBloodType(lastName) {
 }
 
 //Hacking
+
+function checkIfHacked() {
+  if (systemHacked === false) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function hackTheSystem() {
   console.log("system is HACKED");
