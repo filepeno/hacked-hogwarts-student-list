@@ -607,7 +607,7 @@ function hackTheSystem() {
   changeUiToHacked();
   addHackerToStudents();
   changeBloodTypes();
-  trackSelectorsToRandomizeBloodType();
+  trackSelectorsToChangeBloodType();
   buildList();
 }
 
@@ -627,7 +627,7 @@ function addHackerToStudents() {
   allStudents.unshift(hacker);
 }
 
-function trackSelectorsToRandomizeBloodType() {
+function trackSelectorsToChangeBloodType() {
   HTML.filterSelector.forEach((element) => {
     element.addEventListener("click", changeBloodTypes);
   });
