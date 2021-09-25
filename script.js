@@ -320,6 +320,8 @@ function displayStudent(student) {
   //inquisitor-status
   function changeInquisitorStatus() {
     console.log("changeInquisitorStatus()");
+    const button = this;
+    const studentWrapper = this.closest(".studentWrapper");
     if (student.inquisitor) {
       student.inquisitor = false;
     } else {
@@ -329,16 +331,19 @@ function displayStudent(student) {
       if (student.bloodType === "pure-blood" || student.house === "Slytherin") {
         student.inquisitor = true;
         if (systemHacked === true) {
-          setTimeout(getInquisitor, 5000);
-          function getInquisitor() {
-            removeFromInquisitors(student);
+          setTimeout(hardRemoveInquisitor, 3000);
+          function hardRemoveInquisitor() {
+            student.inquisitor = false;
+            changeInquisitorView(student, button, studentWrapper);
+            showInquisitorHackedAnimation(studentWrapper);
           }
         }
       } else {
         openCannotAppointToInquisitorsDialog();
       }
     }
-    buildList();
+    changeInquisitorView(student, button, studentWrapper);
+    // buildList();
   }
   //expelled student
   if (student.expelled === true) {
@@ -357,6 +362,7 @@ function displayStudent(student) {
   clone.querySelector("button.expelBtn").addEventListener("click", checkIfHacker);
   function checkIfHacker() {
     const studentClone = this.parentElement;
+    console.log(studentClone);
     if (student.hacker === true) {
       console.log("Hacker can't be expelled");
       showExpelHackerAnimation(studentClone);
@@ -470,11 +476,21 @@ function buildPrefectsList() {
   buildList();
 }
 
-function removeFromInquisitors(student) {
-  console.log("remove inquisitor " + student.lastName);
-  student.inquisitor = false;
-  buildList();
+function changeInquisitorView(student, button, studentWrapper) {
+  button.dataset.inquisitor = student.inquisitor;
+  if (student.inquisitor) {
+    studentWrapper.classList.add("inquisitorShadow");
+  } else {
+    studentWrapper.classList.remove("inquisitorShadow");
+  }
 }
+
+function showInquisitorHackedAnimation(studentWrapper) {
+  studentWrapper.classList.add("shakeAnimation");
+  studentWrapper.addEventListener("animationend", buildList);
+}
+
+function showHackedInquisitorAnimation(element) {}
 
 function showExpelHackerAnimation(article) {
   console.log("showExpelHackerAnimation()");
