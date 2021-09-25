@@ -606,7 +606,7 @@ function hackTheSystem() {
   systemHacked = true;
   changeUiToHacked();
   addHackerToStudents();
-  makeBloodTypesRandom();
+  changeBloodTypes();
   trackSelectorsToRandomizeBloodType();
   buildList();
 }
@@ -629,29 +629,33 @@ function addHackerToStudents() {
 
 function trackSelectorsToRandomizeBloodType() {
   HTML.filterSelector.forEach((element) => {
-    element.addEventListener("click", makeBloodTypesRandom);
+    element.addEventListener("click", changeBloodTypes);
   });
   HTML.sortSelector.forEach((element) => {
-    element.addEventListener("click", makeBloodTypesRandom);
+    element.addEventListener("click", changeBloodTypes);
   });
 }
 
-function makeBloodTypesRandom() {
+function changeBloodTypes() {
   console.log("makeBloodTypesRandom()");
   allStudents.forEach((student) => {
     if (student.bloodType === "pure-blood") {
-      console.log(student);
-      const bloodTypes = ["half-blood", "pure-blood", "muggle"];
-      const randomNumber = Math.floor(Math.random() * 3);
-      student.bloodType = bloodTypes[randomNumber];
-      console.log(student.lastName + " became " + student.bloodType);
+      randomizeBloodTypes(student);
     } else {
-      console.log(student);
-      student.bloodType = "pure-blood";
-      console.log(student.lastName + " became pure-blood");
+      changeToPureBlood(student);
     }
   });
   buildList();
+}
+
+function randomizeBloodTypes(student) {
+  const bloodTypes = ["half-blood", "pure-blood", "muggle"];
+  const randomNumber = Math.floor(Math.random() * 3);
+  student.bloodType = bloodTypes[randomNumber];
+}
+
+function changeToPureBlood(student) {
+  student.bloodType = "pure-blood";
 }
 
 function changeUiToHacked() {
