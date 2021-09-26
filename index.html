@@ -33,7 +33,9 @@
               <option value="lastName">Last name</option>
               <option value="firstName">First name</option>
             </select>
-            <button id="sortDirection"><img data-action="sort" data-sort-direction="asc" id="arrows" src="/assets/img/arrows_up_down.svg" alt="arrows" /></button>
+            <button id="sortDirection">
+              <img data-action="sort" data-sort-direction="asc" id="arrows" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/arrows_up_down.svg" alt="arrows" />
+            </button>
           </div>
         </div>
         <div class="search">
@@ -59,26 +61,26 @@
       </template>
 
       <article id="studentCard" class="hidden">
-        <button class="closeStudentCard"><img class="closeBtn" src="/assets/img/close_btn.svg" alt="close_btn" /></button>
+        <button class="closeStudentCard"><img class="closeBtn" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/close_btn.svg" alt="close" /></button>
         <div class="crest"></div>
         <img src="" alt="" class="img" />
         <h3 class="name">*Full Name*</h3>
         <div class="stroke"></div>
         <ul class="info">
-          <li class="house"><img class="icon" id="houseIcon" src="/assets/img/house_icon.svg" alt="house icon" /><span></span></li>
-          <li class="bloodType"><img class="icon" id="bloodIcon" src="/assets/img/blood_icon.svg" alt="blood icon" /><span></span></li>
+          <li class="house"><img class="icon" id="houseIcon" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/house_icon.svg" alt="house icon" /><span></span></li>
+          <li class="bloodType"><img class="icon" id="bloodIcon" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/blood_icon.svg" alt="blood icon" /><span></span></li>
         </ul>
       </article>
 
       <article class="dialog hidden" id="sameGenderPrefect">
-        <button class="closeDialog"><img class="closeBtn" src="/assets/img/close_btn.svg" alt="close_btn" /></button>
+        <button class="closeDialog"><img class="closeBtn" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/close_btn.svg" alt="close" /></button>
         <p>There can only be one <span id="gender">*gender*</span> prefect in each house.</p>
         <p>Please, choose another prefect, or remove the existing <span id="house">*House*</span> prefect:</p>
         <p><button data-action="remove1">remove</button> <span class="student1">*Full Name*</span></p>
       </article>
 
       <article class="dialog hidden" id="tooManyPrefects">
-        <button class="closeDialog"><img class="closeBtn" src="/assets/img/close_btn.svg" alt="close_btn" /></button>
+        <button class="closeDialog"><img class="closeBtn" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/close_btn.svg" alt="close" /></button>
         <p>There can be maximum two prefects in each house.</p>
         <p>If you want to appoint another <span id="house">*House*</span> prefect, please remove one of the existing prefects:</p>
         <p><button data-action="remove1">remove</button> <span class="student1">*Full Name*</span></p>
@@ -86,7 +88,7 @@
       </article>
 
       <article class="dialog hidden" id="cannotAppointToInquisitors">
-        <button class="closeDialog"><img class="closeBtn" src="/assets/img/close_btn.svg" alt="close_btn" /></button>
+        <button class="closeDialog"><img class="closeBtn" src="https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/graphics/close_btn.svg" alt="close" /></button>
         <p>Inquisitor squad members must be either pure-blood or from Slytherin</p>
       </article>
 
