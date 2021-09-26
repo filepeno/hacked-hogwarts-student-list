@@ -111,6 +111,8 @@ article.student {
   border-radius: 22%;
   color: var(--color-04);
   text-align: center;
+  height: 113px;
+  width: 107px;
 }
 
 div.name {
