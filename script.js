@@ -262,7 +262,7 @@ function displayStudent(student) {
   if (student.hacker) {
     clone.querySelector(".img").src = student.img;
   } else {
-    clone.querySelector(".img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+    clone.querySelector(".img").src = "https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
   }
   clone.querySelector(".img").alt = `Image of ${student.firstName} ${student.lastName}`;
   if (student.nickName === null && student.middleName === null) {
@@ -379,7 +379,7 @@ function displayStudent(student) {
     if (student.hacker === true) {
       document.querySelector("#studentCard .img").src = student.img;
     } else {
-      document.querySelector("#studentCard .img").src = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
+      document.querySelector("#studentCard .img").src = "https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/" + student.img;
     }
     document.querySelector("#studentCard .img").alt = `Image of ${student.firstName} ${student.lastName}`;
     if (student.nickName === null && student.middleName === null) {
@@ -642,7 +642,7 @@ function addHackerToStudents() {
   hacker.house = "Slytherin";
   hacker.gender = "boy";
   hacker.bloodType = "cold-blood";
-  hacker.img = "http://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/hacker.jpg";
+  hacker.img = "https://filipsoudakov.dk/kea/3rd-semester/11c_coding_visual_design/assignments/hacked_hogwarts_student_list/assets/img/hacker.jpg";
   hacker.hacker = true;
   allStudents.unshift(hacker);
 }
