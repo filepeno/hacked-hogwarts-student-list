@@ -490,8 +490,6 @@ function showInquisitorHackedAnimation(studentWrapper) {
   studentWrapper.addEventListener("animationend", buildList);
 }
 
-function showHackedInquisitorAnimation(element) {}
-
 function showExpelHackerAnimation(article) {
   console.log("showExpelHackerAnimation()");
   article.classList.add("shakeAnimation");
