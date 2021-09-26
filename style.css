@@ -200,6 +200,10 @@ article.dialog {
   filter: invert(94%) sepia(6%) saturate(0%) hue-rotate(3deg) brightness(105%) contrast(105%);
 }
 
+article.dialog p.option {
+  margin: 1rem auto 0;
+}
+
 /* studentCard */
 
 button.openStudentCard {
