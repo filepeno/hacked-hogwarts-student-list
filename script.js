@@ -486,7 +486,7 @@ function changeInquisitorView(student, button, studentWrapper) {
 }
 
 function showInquisitorHackedAnimation(studentWrapper) {
-  studentWrapper.classList.add("shakeAnimation");
+  studentWrapper.classList.add("hackedInquisitorAnimation");
   studentWrapper.addEventListener("animationend", buildList);
 }
 

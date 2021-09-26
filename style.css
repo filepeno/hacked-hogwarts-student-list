@@ -14,6 +14,7 @@
   --color-05: rgb(0, 0, 0);
   --color-link: rgb(134, 134, 134);
   --inquisitor-shadow: #34ebc3;
+  --inquisitor-remove-shadow: #6a0dff;
   --prefect-border: #ffe15d;
   --color-expel: rgb(92, 11, 0);
   --gryf-bg-color: #740001;
@@ -422,6 +423,23 @@ a {
 
 .inquisitorShadow {
   box-shadow: 0px 5px 16px 4px var(--inquisitor-shadow);
+}
+
+.hackedInquisitorAnimation {
+  animation: changeShadow 2s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes changeShadow {
+  0% {
+    box-shadow: 0px 5px 16px 4px var(--inquisitor-shadow);
+  }
+  98% {
+    box-shadow: 0px 5px 16px 20px var(--inquisitor-remove-shadow);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 0px var(--inquisitor-remove-shadow);
+  }
 }
 
 .addInquisitorShadow {
