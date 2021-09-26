@@ -635,8 +635,8 @@ function addHackerToStudents() {
   console.log("addHackerToStudents()");
   const hacker = Object.create(Student);
   console.log(hacker);
-  hacker.firstName = "Abu";
-  hacker.lastName = "Abba";
+  hacker.firstName = "Filip";
+  hacker.lastName = "Soudakov";
   hacker.middleName = null;
   hacker.nickName = null;
   hacker.house = "Slytherin";
