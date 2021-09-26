@@ -39,10 +39,7 @@ body {
 }
 
 header {
-  /* display: flex;
-  align-items: center; */
   margin-bottom: 1rem;
-  background-color: var(--bg-color-02);
   padding: 2rem;
 }
 
